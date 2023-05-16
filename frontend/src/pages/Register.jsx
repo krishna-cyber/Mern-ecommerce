@@ -20,11 +20,11 @@ const Register = () => {
           className=' bg-white shadow-2xl text-lg rounded-md w-[25%] flex flex-col gap-4 py-8 p-4'
           onSubmit={handleSubmit(onSubmit)}>
           <div className='flex flex-col'>
-            <label htmlFor='email'>Full Name:</label>
+            <label htmlFor='name'>Full Name:</label>
             <input
               className=' p-1 rounded-md shadow-lg outline outline-1 outline-gray-200'
-              type='email'
-              {...register("email", {
+              type='text'
+              {...register("name", {
                 required: {
                   value: true,
                   message: "Full name is required",
@@ -89,13 +89,13 @@ const Register = () => {
           <button
             type='submit'
             className=' bg-blue-600 p-2 rounded-md text-white'>
-            Submit
+            Sign up
           </button>
           <div className='signup'>
             <p>
               Already have an account?{" "}
               <Link
-                to='/signup'
+                to='/login'
                 className=' text-blue-400 font-semibold cursor-pointer hover:underline'>
                 Login
               </Link>
