@@ -1,9 +1,22 @@
+//installed or library modules
 const express = require("express");
+const cookieParser = require("cookie-parser");
 const mongoose = require("mongoose");
 require("dotenv").config({ path: "./config/.env" });
 
+//created and imported modules
+const dbconnection = require("./database/databaseConnection");
+const errorHandler = require("./middlewares/errorHandler");
+
 //creating server instance
 const app = express();
+
+//priority of middlewares
+app.use(express.json());
+app.use(cookieParser());
+app.use(errorHandler);
+//database connection with mongo atlas
+dbconnection();
 
 //catching uncaught exceptions
 process.on("uncaughtException", (err) => {
@@ -25,20 +38,6 @@ process.on("unhandledRejection", (err) => {
 app.get("/", (req, res) => {
   res.send("Hello World");
 });
-
-//starting server
-mongoose
-  .connect(process.env.MONGO_URI, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-  })
-  .then((db) => {
-    console.log(`connected to db instance 🕸️📑 ${db.connections[0].name}`);
-  })
-  .catch((err) => {
-    console.log("Failed to connect to MongoDB Atlas");
-    console.log(err);
-  });
 
 const server = app.listen(3000, () => {
   console.log(`Server is running on port ${process.env.PORT}`);
