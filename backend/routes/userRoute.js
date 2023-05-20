@@ -1,4 +1,5 @@
 const express = require("express");
+const upload = require("../utils/multer"); // for file upload and storage
 const router = express.Router();
 
 const {
@@ -21,6 +22,6 @@ const {
 router.get("/", getUserProfile);
 
 //register user
-router.post("/register", registerUser);
+router.post("/register", upload.single("avatar"), registerUser);
 
 module.exports = router;
