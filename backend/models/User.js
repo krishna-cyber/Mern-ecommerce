@@ -1,5 +1,7 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
+const bcrypt = require("bcryptjs");
+const jwt = require("jsonwebtoken");
 
 const userSchmea = new Schema(
   {
@@ -82,3 +84,8 @@ userSchmea.methods.getJwtToken = function () {
     expiresIn: process.env.JWT_EXPIRES_TIME,
   });
 };
+
+//creating model for userSchema
+const User = mongoose.model("User", userSchmea);
+
+module.exports = User;

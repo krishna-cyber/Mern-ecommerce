@@ -13,6 +13,7 @@ const app = express();
 
 //priority of middlewares
 app.use(express.urlencoded({ extended: true }));
+app.use("/", express.static("uploads")); //give access to uploads folder
 app.use(express.json());
 app.use(cookieParser());
 app.use(errorHandler);
@@ -36,9 +37,7 @@ process.on("unhandledRejection", (err) => {
 });
 
 //routes for server
-app.get("/", (req, res) => {
-  res.send("Hello World");
-});
+app.use("/api/users", require("./routes/userRoute"));
 
 const server = app.listen(3000, () => {
   console.log(`Server is running on port ${process.env.PORT}`);
