@@ -13,6 +13,7 @@ const userSchmea = new Schema(
     email: {
       type: String,
       required: [true, "please enter your email"],
+      unique: [true, "Email already exists"],
     },
     password: {
       type: String,

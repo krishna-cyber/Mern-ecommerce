@@ -1,6 +1,14 @@
 const expressAsyncHandler = require("express-async-handler");
+const jwt = require("jsonwebtoken"); //jwt token for user authentication
 
 const User = require("../models/User"); // user model that contains user schema
+
+//generate jwt token
+const generateToken = (id) => {
+  return jwt.sign({ id }, process.env.JWT_SECRET, {
+    expiresIn: process.env.JWT_EXPIRES_TIME,
+  });
+};
 
 //controller starts from here
 
@@ -36,8 +44,23 @@ const registerUser = expressAsyncHandler(async (req, res) => {
       password,
       avatar,
     }).then((user) => {
+      const { _id, name, email, avatar, address, role } = user;
+      //generate token for user
+      const token = generateToken(user._id);
+
+      //set cookie for user
+      res.cookie("token", token, {
+        expires: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000), //30 days
+        httpOnly: true,
+      });
+
       return res.status(201).json({
-        user,
+        _id,
+        name,
+        email,
+        avatar,
+        address,
+        role,
       });
     });
   });
