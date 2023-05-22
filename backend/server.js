@@ -5,6 +5,7 @@ const mongoose = require("mongoose");
 require("dotenv").config({ path: "./config/.env" });
 const cors = require("cors");
 const morgan = require("morgan");
+const path = require("path");
 
 //created and imported modules
 const dbconnection = require("./database/databaseConnection");
@@ -17,7 +18,7 @@ app.use(cors({ origin: "http://localhost:5173", credentials: true }));
 
 //priority of middlewares
 app.use(express.urlencoded({ extended: true }));
-app.use("/", express.static("uploads")); //give access to uploads folder
+app.use("/", express.static(path.join(__dirname, "./uploads"))); //give access to uploads folder
 app.use(express.json());
 app.use(cookieParser());
 app.use(errorHandler);
