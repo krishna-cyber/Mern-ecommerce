@@ -3,6 +3,8 @@ const express = require("express");
 const cookieParser = require("cookie-parser");
 const mongoose = require("mongoose");
 require("dotenv").config({ path: "./config/.env" });
+const cors = require("cors");
+const morgan = require("morgan");
 
 //created and imported modules
 const dbconnection = require("./database/databaseConnection");
@@ -10,6 +12,8 @@ const errorHandler = require("./middlewares/errorHandler");
 
 //creating server instance
 const app = express();
+//accessing cors
+app.use(cors({ origin: "http://localhost:5173", credentials: true }));
 
 //priority of middlewares
 app.use(express.urlencoded({ extended: true }));
@@ -17,6 +21,7 @@ app.use("/", express.static("uploads")); //give access to uploads folder
 app.use(express.json());
 app.use(cookieParser());
 app.use(errorHandler);
+app.use(morgan("dev"));
 //database connection with mongo atlas
 dbconnection();
 

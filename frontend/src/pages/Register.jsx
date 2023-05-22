@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
+import server from "../utils/server";
 import { RxAvatar } from "react-icons/rx";
+import { toast } from "react-toastify";
 
 const Register = () => {
   const {
@@ -10,7 +12,17 @@ const Register = () => {
     watch,
     formState: { errors },
   } = useForm();
-  const onSubmit = (data) => console.log(data);
+
+  //function after form submission
+  const onSubmit = async (data) => {
+    data.avatar = avatar;
+    console.log(data);
+    server.post("/users/register", data).then((res) => {
+      toast.success("User registered successfully");
+      console.log(res);
+    });
+  };
+
   const [avatar, setAvatar] = useState(null);
   return (
     <>
