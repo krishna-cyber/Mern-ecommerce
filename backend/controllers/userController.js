@@ -67,3 +67,10 @@ const registerUser = expressAsyncHandler(async (req, res) => {
 });
 
 module.exports = { getUserProfile, registerUser };
+
+//jwt for activation toke
+const activationToken = (id) => {
+  return jwt.sign({ id }, process.env.ACRIVATION_SECRET, {
+    expiresIn: "5min",
+  });
+};
