@@ -48,6 +48,10 @@ const registerUser = expressAsyncHandler(async (req, res) => {
       //generate token for user
       const token = generateToken(user._id);
 
+      //generate activation token
+      const activationToken = activationToken(user._id);
+      const url = `http://localhost:3000/activate/${activationToken}`;
+
       //set cookie for user
       res.cookie("token", token, {
         expires: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000), //30 days
