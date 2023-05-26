@@ -17,7 +17,9 @@ const sendEmail = async (options) => {
     text: options.message,
   };
 
-  await transport.sendMail(mailOptions);
+  await transport.sendMail(mailOptions).then((info) => {
+    console.log(`Message sent: ${info.messageId}`);
+  });
 };
 
 module.exports = sendEmail;

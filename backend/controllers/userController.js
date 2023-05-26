@@ -2,11 +2,19 @@ const expressAsyncHandler = require("express-async-handler");
 const jwt = require("jsonwebtoken"); //jwt token for user authentication
 
 const User = require("../models/User"); // user model that contains user schema
+const sendEmail = require("../utils/nodeMailer"); //node mailer for sending email to user
 
 //generate jwt token
 const generateToken = (id) => {
   return jwt.sign({ id }, process.env.JWT_SECRET, {
     expiresIn: process.env.JWT_EXPIRES_TIME,
+  });
+};
+
+//jwt for activation toke
+const generateActivationToken = (id) => {
+  return jwt.sign({ id }, process.env.ACTIVATION_SECRET, {
+    expiresIn: "5min",
   });
 };
 
@@ -43,14 +51,22 @@ const registerUser = expressAsyncHandler(async (req, res) => {
       email,
       password,
       avatar,
-    }).then((user) => {
+    }).then(async (user) => {
       const { _id, name, email, avatar, address, role } = user;
       //generate token for user
       const token = generateToken(user._id);
 
-      //generate activation token
-      const activationToken = activationToken(user._id);
+      // generate activation token
+      const activationToken = generateActivationToken(user._id);
       const url = `http://localhost:3000/activate/${activationToken}`;
+
+      //send email to user
+      await sendEmail({
+        email: user.email,
+        subject: "Account Activation Link",
+        message: `<h2>Please click on given link to activate your account</h2>
+          <a href="${url}">${url}</a>`,
+      });
 
       //set cookie for user
       res.cookie("token", token, {
@@ -71,10 +87,3 @@ const registerUser = expressAsyncHandler(async (req, res) => {
 });
 
 module.exports = { getUserProfile, registerUser };
-
-//jwt for activation toke
-const activationToken = (id) => {
-  return jwt.sign({ id }, process.env.ACRIVATION_SECRET, {
-    expiresIn: "5min",
-  });
-};
