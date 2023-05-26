@@ -9,4 +9,15 @@ const sendEmail = async (options) => {
       pass: "e1873fd133c0a7",
     },
   });
+
+  const mailOptions = {
+    from: process.env.FROM_EMAIL,
+    to: options.email,
+    subject: options.subject,
+    text: options.message,
+  };
+
+  await transport.sendMail(mailOptions);
 };
+
+module.exports = sendEmail;
