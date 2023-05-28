@@ -2,11 +2,11 @@ const nodemailer = require("nodemailer");
 
 const sendEmail = async (options) => {
   var transport = nodemailer.createTransport({
-    host: "sandbox.smtp.mailtrap.io",
-    port: 2525,
+    host: process.env.EMAIL_HOST,
+    port: process.env.SMTP_PORT,
     auth: {
-      user: "a4671171e5a09c",
-      pass: "e1873fd133c0a7",
+      user: process.env.SMTP_USER,
+      pass: process.env.SMTP_PASSWORD,
     },
   });
 
@@ -17,8 +17,16 @@ const sendEmail = async (options) => {
     text: options.message,
   };
 
-  await transport.sendMail(mailOptions).then((info) => {
-    console.log(`Message sent: ${info.messageId}`);
+  await transport.sendMail(mailOptions, function (error, info) {
+    if (error) {
+      console.log(error);
+      throw {
+        message: "Email could not be sent",
+        statusCode: 500,
+      };
+    } else {
+      console.log("Email sent: " + info.response);
+    }
   });
 };
 
