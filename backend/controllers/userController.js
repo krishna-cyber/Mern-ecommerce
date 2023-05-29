@@ -69,7 +69,10 @@ const registerUser = expressAsyncHandler(async (req, res) => {
 
       // generate activation token
       const activationToken = generateActivationToken(user._id);
-      const url = `http://localhost:3000/activate/${activationToken}`;
+
+      //remove dot from token and replace with underscore
+      const activation_token = activationToken.replace(/\./g, "_");
+      const url = `http://localhost:5173/activate/${activation_token}`;
 
       //send email to user
       await sendEmail({
