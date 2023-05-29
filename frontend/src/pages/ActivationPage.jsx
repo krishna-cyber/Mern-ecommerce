@@ -1,9 +1,14 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
 
 const ActivationPage = () => {
   const { activation_token } = useParams();
-  console.log(activation_token);
+
+  useEffect(() => {
+    if (activation_token) {
+      console.log(activation_token);
+    }
+  }, [activation_token]);
   return (
     <section className=' h-screen w-screen flex justify-center items-center'>
       <p className=' font-semibold text-md'>

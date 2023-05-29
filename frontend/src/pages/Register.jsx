@@ -17,10 +17,18 @@ const Register = () => {
   const onSubmit = async (data) => {
     data.avatar = avatar;
     console.log(data);
-    server.post("/users/register", data).then((res) => {
-      toast.success("User registered successfully");
-      console.log(res);
-    });
+
+    //toast with promise
+    const response = await toast.promise(
+      server.post("/users/register", data).then((res) => {
+        console.log(res);
+      }),
+      {
+        pending: "Please wait registering user... 🤔",
+        success: "User verification email sent 📧",
+        error: "Something went wrong 😕",
+      }
+    );
   };
 
   const [avatar, setAvatar] = useState(null);
