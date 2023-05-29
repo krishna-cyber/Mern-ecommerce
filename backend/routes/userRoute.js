@@ -4,6 +4,7 @@ const router = express.Router();
 
 const {
   registerUser,
+  tokenVerification,
   loginUser,
   logoutUser,
   forgotPassword,
@@ -23,5 +24,8 @@ router.get("/", getUserProfile);
 
 //register user
 router.post("/register", upload.single("avatar"), registerUser);
+
+//token verification for user activation
+router.post("/activation", tokenVerification);
 
 module.exports = router;

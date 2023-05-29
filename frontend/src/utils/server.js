@@ -6,4 +6,8 @@ const server = axios.create({
   headers: { "Content-Type": "multipart/form-data" },
 });
 
-export default server;
+const activationServer = axios.create({
+  baseURL: "http://localhost:3000/api/users/activation",
+});
+
+export { server, activationServer };

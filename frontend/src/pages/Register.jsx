@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
-import server from "../utils/server";
+import { server } from "../utils/server";
 import { RxAvatar } from "react-icons/rx";
 import { toast } from "react-toastify";
 
@@ -26,7 +26,7 @@ const Register = () => {
       {
         pending: "Please wait registering user... 🤔",
         success: "User verification email sent 📧",
-        error: "Something went wrong 😕",
+        error: "User registration failed 😢",
       }
     );
   };

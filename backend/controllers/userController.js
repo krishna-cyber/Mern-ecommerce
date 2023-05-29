@@ -100,4 +100,10 @@ const registerUser = expressAsyncHandler(async (req, res) => {
   });
 });
 
-module.exports = { getUserProfile, registerUser };
+//token verification controller
+const tokenVerification = expressAsyncHandler(async (req, res) => {
+  console.log(req.body);
+  res.send("Hello World");
+});
+
+module.exports = { getUserProfile, registerUser, tokenVerification };
