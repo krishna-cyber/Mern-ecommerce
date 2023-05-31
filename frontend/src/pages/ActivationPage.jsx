@@ -7,8 +7,12 @@ const ActivationPage = () => {
 
   //activate user account
   const activate = (activation_token) => {
+    //making correct activation token by implementing dot to underscore
+    const token = activation_token.replace(/\+/g, ".");
+    console.log(token);
+
     activationServer
-      .post("/", { activation_token })
+      .post("/", { token })
       .then((res) => {
         console.log(res);
       })

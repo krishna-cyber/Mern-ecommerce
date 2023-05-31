@@ -54,6 +54,10 @@ const userSchmea = new Schema(
       type: String,
       required: true,
     },
+    status: {
+      type: String,
+      default: "pending",
+    },
     resetPasswordToken: String,
     resetPasswordExpire: Date,
   },
