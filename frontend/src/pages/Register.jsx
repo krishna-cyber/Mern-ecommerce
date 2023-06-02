@@ -9,20 +9,32 @@ const Register = () => {
   const {
     register,
     handleSubmit,
+    reset,
     watch,
-    formState: { errors },
+    formState: { errors, isSubmitting },
   } = useForm();
 
   //function after form submission
   const onSubmit = async (data) => {
     data.avatar = avatar;
+    //disable submit button
+    console.log(isSubmitting);
     console.log(data);
 
     //toast with promise
     const response = await toast.promise(
-      server.post("/users/register", data).then((res) => {
-        console.log(res);
-      }),
+      server
+        .post("/users/register", data)
+        .then((res) => {
+          reset();
+          setAvatar(null);
+          console.log(res);
+          console.log(isSubmitting);
+        })
+        .catch((err) => {
+          console.log(err);
+          console.log(isSubmitting);
+        }),
       {
         pending: "Please wait registering user... 🤔",
         success: "User verification email sent 📧",
@@ -107,8 +119,9 @@ const Register = () => {
             </label>
           </div>
           <button
+            disabled={isSubmitting}
             type='submit'
-            className=' bg-blue-600 p-2 rounded-md text-white'>
+            className=' bg-blue-600 p-2 rounded-md text-white disabled:bg-blue-400'>
             Sign up
           </button>
           <div className='signup'>
