@@ -26,19 +26,22 @@ const Register = () => {
       server
         .post("/users/register", data)
         .then((res) => {
+          //check if user exist or not
+          console.log(res.data);
+          if (res.data) {
+            toast.success(`Verification email sent .`);
+          } else {
+            toast.error(res.data.message);
+          }
           reset();
           setAvatar(null);
-          console.log(res);
-          console.log(isSubmitting);
         })
         .catch((err) => {
           console.log(err);
-          console.log(isSubmitting);
         }),
       {
         pending: "Please wait registering user... 🤔",
-        success: "User verification email sent 📧",
-        error: "User registration failed 😢",
+        error: "Something went wrong 😞",
       }
     );
   };

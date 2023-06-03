@@ -18,7 +18,7 @@ const userSchmea = new Schema(
     password: {
       type: String,
       required: [true, "Please enter your password"],
-      minLength: [4, "Password should be greater than 4 characters"],
+      minLength: [4, "Password must be at least 4 characters long"],
       select: false,
     },
     phoneNumber: {

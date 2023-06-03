@@ -43,12 +43,15 @@ const registerUser = expressAsyncHandler(async (req, res) => {
         fs.unlink(req.file.path, (err) => {
           console.log(`file deleted ${req.file.path}`);
           if (err) {
-            console.log(err);
+            throw {
+              status: 500,
+              message: err,
+            };
           }
         });
       }
 
-      return res.status(400).json({ email: "Email already exists" });
+      return res.status(400).json({ message: "Email already exists" });
     }
 
     //get file path from multer
@@ -67,41 +70,48 @@ const registerUser = expressAsyncHandler(async (req, res) => {
       email,
       password,
       avatar,
-    }).then(async (user) => {
-      const { _id, name, email, avatar, address, role } = user;
-      //generate token for user
-      const token = generateToken(user._id);
+    })
+      .then(async (user) => {
+        const { _id, name, email, avatar, address, role } = user;
+        //generate token for user
+        const token = generateToken(user._id);
 
-      // generate activation token
-      const activationToken = generateActivationToken(user._id);
+        // generate activation token
+        const activationToken = generateActivationToken(user._id);
 
-      //remove dot from token and replace with underscore
-      const activation_token = activationToken.replace(/\./g, "+");
-      const url = `http://localhost:5173/activate/${activation_token}`;
+        //remove dot from token and replace with underscore
+        const activation_token = activationToken.replace(/\./g, "+");
+        const url = `http://localhost:5173/activate/${activation_token}`;
 
-      //send email to user
-      await sendEmail({
-        email: user.email,
-        subject: "Account Activation Link",
-        message: `<h2>Please click on given link to activate your account</h2>
+        //send email to user
+        await sendEmail({
+          email: user.email,
+          subject: "Account Activation Link",
+          message: `<h2>Please click on given link to activate your account</h2>
           <a href="${url}">${url}</a>`,
-      });
+        });
 
-      //set cookie for user
-      res.cookie("token", token, {
-        expires: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000), //30 days
-        httpOnly: true,
-      });
+        //set cookie for user
+        res.cookie("token", token, {
+          expires: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000), //30 days
+          httpOnly: true,
+        });
 
-      return res.status(201).json({
-        _id,
-        name,
-        email,
-        avatar,
-        address,
-        role,
+        return res.status(201).json({
+          _id,
+          name,
+          email,
+          avatar,
+          address,
+          role,
+        });
+      })
+      .catch((err) => {
+        throw {
+          status: 500,
+          message: err,
+        };
       });
-    });
   });
 });
 
