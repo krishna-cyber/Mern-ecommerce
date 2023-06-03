@@ -1,6 +1,7 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
+import { CiWarning } from "react-icons/ci";
 
 const Login = () => {
   const {
@@ -29,6 +30,12 @@ const Login = () => {
                 },
               })}
             />
+            {errors.email && (
+              <p className='flex items-center gap-2 text-red-600 text-lg mt-2'>
+                {" "}
+                <CiWarning /> {errors.email.message}
+              </p>
+            )}
           </div>
           <div className='flex flex-col'>
             <label htmlFor='email'>Password</label>
@@ -42,6 +49,12 @@ const Login = () => {
                 },
               })}
             />
+            {errors.password && (
+              <p className=' flex items-center gap-2 text-red-600 text-lg mt-2'>
+                {" "}
+                <CiWarning /> {errors.password.message}
+              </p>
+            )}
           </div>
           <div className='flex justify-between '>
             <span>
