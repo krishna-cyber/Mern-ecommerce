@@ -28,4 +28,7 @@ router.post("/register", upload.single("avatar"), registerUser);
 //token verification for user activation
 router.post("/activation", tokenVerification);
 
+//login user
+router.post("/login", loginUser);
+
 module.exports = router;

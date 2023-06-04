@@ -115,6 +115,61 @@ const registerUser = expressAsyncHandler(async (req, res) => {
   });
 });
 
+//user login controller
+const loginUser = expressAsyncHandler(async (req, res) => {
+  const { email, password } = await req.body;
+
+  //validating user information
+  if (!email || !password) {
+    return res
+      .status(400)
+      .json({ message: "Please provide email and password" });
+  }
+
+  //check if user exist or not
+  await User.findOne({ email }).then(async (user) => {
+    if (!user) {
+      return res.status(404).json({ message: "User does not exist" });
+    }
+
+    //check if user is activated or not
+    if (user.status !== "active") {
+      return res.status(403).json({ message: "Please activate your account" });
+    }
+
+    //if user exist, check if password is correct or not
+    const matched = await user.matchPassword(password);
+
+    //checking password matched or not
+    if (!matched) {
+      return res.status(400).json({ message: "Invalid Credentials" });
+    }
+    //if password matched, generate token for user
+    const token = generateToken(user._id);
+
+    //setting cookie for user
+    res.cookie("token", token, {
+      expires: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000), //30 days
+      httpOnly: true,
+      secure: true,
+      path: "/",
+    });
+
+    //send user information
+    const { _id, name, email, avatar, address, role } = user;
+
+    return res.status(200).json({
+      message: "User logged in successfully",
+      _id,
+      name,
+      email,
+      avatar,
+      address,
+      role,
+    });
+  });
+});
+
 //token verification controller
 const tokenVerification = expressAsyncHandler(async (req, res) => {
   const { token } = req.body;
@@ -160,4 +215,4 @@ const tokenVerification = expressAsyncHandler(async (req, res) => {
     });
 });
 
-module.exports = { getUserProfile, registerUser, tokenVerification };
+module.exports = { getUserProfile, registerUser, tokenVerification, loginUser };

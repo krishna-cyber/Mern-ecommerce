@@ -19,7 +19,6 @@ const userSchmea = new Schema(
       type: String,
       required: [true, "Please enter your password"],
       minLength: [4, "Password must be at least 4 characters long"],
-      select: false,
     },
     phoneNumber: {
       type: String,
@@ -80,7 +79,8 @@ userSchmea.pre("save", async function (next) {
 
 //compare password
 userSchmea.methods.matchPassword = async function (password) {
-  return await bcrypt.compare(password, this.password);
+  const match = await bcrypt.compare(password, this.password);
+  return match;
 };
 
 //generating token for user
