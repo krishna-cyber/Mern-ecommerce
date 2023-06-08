@@ -27,8 +27,24 @@ const verifyActivationToken = (token) => {
 //controller starts from here
 
 //get user profile controller
-const getUserProfile = expressAsyncHandler((req, res) => {
-  res.send("Hello World");
+const getUserProfile = expressAsyncHandler(async (req, res) => {
+  const user = req.user;
+
+  //getting user information from database and send user response to client
+  await User.findById(user)
+    .select("-password")
+    .then((user) => {
+      if (!user) {
+        throw {
+          status: 404,
+          message: "User does not exist",
+        };
+      }
+      return res.status(200).json(user);
+    })
+    .catch((err) => {
+      throw new Error(err);
+    });
 });
 
 //register user controller

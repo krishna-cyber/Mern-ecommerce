@@ -1,8 +1,20 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Routes, Route } from "react-router-dom";
 import { Login, Register, Home, Forgot, ActivationPage } from "./utils/routes";
+import { fetchServer } from "./utils/server";
+import { toast } from "react-toastify";
 
 const App = () => {
+  useEffect(() => {
+    fetchServer
+      .get("/")
+      .then((res) => {
+        toast.success(res.data.message);
+      })
+      .catch((err) => {
+        toast.error(err.response.data.message);
+      });
+  }, []);
   return (
     <div>
       <Routes>

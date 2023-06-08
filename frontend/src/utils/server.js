@@ -6,8 +6,13 @@ const server = axios.create({
   headers: { "Content-Type": "multipart/form-data" },
 });
 
+const fetchServer = axios.create({
+  baseURL: "http://localhost:3000/api/users/getuser",
+  withCredentials: true,
+});
+
 const activationServer = axios.create({
   baseURL: "http://localhost:3000/api/users/activation",
 });
 
-export { server, activationServer };
+export { server, activationServer, fetchServer };
