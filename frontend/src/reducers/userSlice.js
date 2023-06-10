@@ -31,5 +31,5 @@ const userSlice = createSlice({
 });
 
 export const { loginRequest, loginFail, loginSuccess, clearError } =
-  counterSlice.actions;
+  userSlice.actions;
 export default userSlice.reducer;
