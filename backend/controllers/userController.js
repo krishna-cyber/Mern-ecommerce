@@ -28,10 +28,10 @@ const verifyActivationToken = (token) => {
 
 //get user profile controller
 const getUserProfile = expressAsyncHandler(async (req, res) => {
-  const user = req.user;
+  const { id } = req.user;
 
   //getting user information from database and send user response to client
-  await User.findById(user)
+  await User.findById(id)
     .select("-password")
     .then((user) => {
       if (!user) {
