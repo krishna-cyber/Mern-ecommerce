@@ -15,4 +15,8 @@ const activationServer = axios.create({
   baseURL: "http://localhost:3000/api/users/activation",
 });
 
-export { server, activationServer, fetchServer };
+const loginServer = axios.create({
+  baseURL: "http://localhost:3000/api/users/login",
+  withCredentials: true,
+});
+export { server, activationServer, fetchServer, loginServer };

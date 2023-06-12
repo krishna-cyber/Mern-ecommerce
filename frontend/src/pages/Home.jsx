@@ -1,10 +1,11 @@
 import React from "react";
+import Header from "../components/Header";
 
 const Home = () => {
   return (
     <div>
-      This is a homepage of the application and no content avilable yet so be
-      chill🤪🤪{" "}
+      this is home page so be chill and enjoy this project 🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥
+      <Header />
     </div>
   );
 };

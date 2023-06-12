@@ -13,15 +13,16 @@ import { toast } from "react-toastify";
 
 const App = () => {
   const dispatch = useDispatch();
-  useEffect(async () => {
+  useEffect(() => {
     dispatch(loginRequest());
-    await fetchServer
+    fetchServer
       .get("/")
       .then((res) => {
+        console.log(res);
         dispatch(loginSuccess(res.data));
-        toast.success(res.data.message);
       })
       .catch((err) => {
+        console.log(err.response);
         dispatch(loginFail(err.response.data));
         toast.error(err.response.data.message);
         dispatch(clearError());

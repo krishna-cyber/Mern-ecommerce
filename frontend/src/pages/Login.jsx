@@ -2,6 +2,8 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
 import { CiWarning } from "react-icons/ci";
+import { loginServer } from "../utils/server";
+import { toast } from "react-toastify";
 
 const Login = () => {
   const {
@@ -10,7 +12,15 @@ const Login = () => {
     watch,
     formState: { errors },
   } = useForm();
-  const onSubmit = (data) => console.log(data);
+  const onSubmit = (data) => {
+    loginServer
+      .post("/", data)
+      .then((res) => {
+        console.log(res);
+        toast.success(res.data.message);
+      })
+      .catch((err) => console.log(err.response));
+  };
   return (
     <>
       <section className=' h-screen bg-[#FFF8DC] flex justify-center flex-col gap-6 items-center'>
