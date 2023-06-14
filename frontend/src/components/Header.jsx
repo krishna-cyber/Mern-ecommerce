@@ -1,6 +1,7 @@
 import React from "react";
 import styles from "../styles/styles";
 import { Link } from "react-router-dom";
+import { BsSearch } from "react-icons/bs";
 
 const Header = () => {
   const handleSearchChange = (e) => {

@@ -4,8 +4,16 @@ import { Link } from "react-router-dom";
 import { CiWarning } from "react-icons/ci";
 import { loginServer } from "../utils/server";
 import { toast } from "react-toastify";
+import {
+  loginFail,
+  loginRequest,
+  loginSuccess,
+  clearError,
+} from "../reducers/userSlice";
+import { useDispatch } from "react-redux";
 
 const Login = () => {
+  const dispatch = useDispatch();
   const {
     register,
     handleSubmit,
@@ -13,13 +21,18 @@ const Login = () => {
     formState: { errors },
   } = useForm();
   const onSubmit = (data) => {
+    dispatch(loginRequest());
     loginServer
       .post("/", data)
       .then((res) => {
-        console.log(res);
         toast.success(res.data.message);
+        delete res.data.message;
+        dispatch(loginSuccess(res.data));
       })
-      .catch((err) => console.log(err.response));
+      .catch((err) => {
+        dispatch(loginFail(err.response.data));
+        toast.error(err.response.data.message);
+      });
   };
   return (
     <>

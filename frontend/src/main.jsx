@@ -11,7 +11,7 @@ import store from "./store/store";
 ReactDOM.createRoot(document.getElementById("root")).render(
   <BrowserRouter>
     <Provider store={store}>
-      <ToastContainer />
+      <ToastContainer pauseOnFocusLoss={false} />
       <App />
     </Provider>
   </BrowserRouter>
