@@ -21,7 +21,7 @@ const Header = () => {
         </div>
         <div className=' relative'>
           <input
-            className='border border-gray-400 rounded-lg p-2 w-96'
+            className=' border-blue-400 border-2 rounded-lg p-2 w-96'
             type='text'
             placeholder='Search product...'
             name='search'
@@ -29,8 +29,8 @@ const Header = () => {
             onChange={handleSearchChange}
           />
 
-          <span className='inline-block absolute right-[4%] top-0 mt-2 mr-2'>
-            <BsSearch className='inline-block absolute ' />
+          <span className='inline-block absolute right-[4%] cursor-pointer top-0 mt-2 mr-2'>
+            <BsSearch className='inline-block  ' />
           </span>
         </div>
       </div>
