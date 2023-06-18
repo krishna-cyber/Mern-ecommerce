@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import styles from "../styles/styles";
 import { Link } from "react-router-dom";
 import { BsSearch } from "react-icons/bs";
@@ -8,6 +8,8 @@ import { BiChevronDown, BiCartAlt } from "react-icons/bi";
 import { AiOutlineHeart } from "react-icons/ai";
 import { FaRegUserCircle } from "react-icons/fa";
 import { Image } from "@chakra-ui/react";
+import { productData } from "../static/data";
+
 import {
   Button,
   Menu,
@@ -22,8 +24,23 @@ import {
 } from "@chakra-ui/react";
 
 const Header = () => {
+  const [searchTerm, setSearchTerm] = useState("");
+  const [searchData, setSearchData] = useState([]);
   const handleSearchChange = (e) => {
-    console.log(e.target.value);
+    //if search field is empty
+    if (e.target.value === "") {
+      setSearchTerm(e.target.value);
+      return setSearchData([]);
+    }
+
+    setSearchTerm(e.target.value);
+    //filter product data
+    console.log(searchTerm);
+    const results = productData.filter((product) => {
+      return product.name.toLowerCase().includes(searchTerm.toLowerCase());
+    });
+    console.log(results);
+    setSearchData(results);
   };
   return (
     <>
@@ -40,13 +57,29 @@ const Header = () => {
           </div>
           <div className=' relative flex-shrink-0 flex-grow-0 w-1/2'>
             <input
-              className=' border-blue-400 border-2 rounded-lg p-2 w-full                                                                                                                                '
+              className=' border-blue-400 border-2 rounded-lg p-2 w-full'
+              onChange={handleSearchChange}
               type='text'
               placeholder='Search product...'
               name='search'
               id='search'
-              onChange={handleSearchChange}
+              value={searchTerm}
             />
+            {searchData.length !== 0 && searchData ? (
+              <div className='absolute bg-white w-full z-10'>
+                {searchData.map((product) => {
+                  return (
+                    <div className='flex justify-between items-center p-2'>
+                      <div className='flex items-center'>
+                        <Image className=' h-8 w-8' src={product.image} />
+                        <p className='ml-2'>{product.name}</p>
+                      </div>
+                      <p className='mr-2'>${product.price}</p>
+                    </div>
+                  );
+                })}
+              </div>
+            ) : null}
             <span className='inline-block absolute right-[4%] cursor-pointer top-0 mt-2 mr-2'>
               <BsSearch className='inline-block  ' />
             </span>
