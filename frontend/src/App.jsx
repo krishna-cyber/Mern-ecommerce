@@ -23,8 +23,8 @@ const App = () => {
       })
       .catch((err) => {
         console.log(err.response);
-        dispatch(loginFail(err.response.data));
-        toast.error(err.response.data.message);
+        dispatch(loginFail(err.response));
+        toast.error(err.response);
         dispatch(clearError());
       });
   }, []);

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import styles from "../styles/styles";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import { BsSearch } from "react-icons/bs";
 import { BiChevronRight } from "react-icons/bi";
 import { BiMenuAltLeft } from "react-icons/bi";
@@ -21,6 +21,17 @@ import {
   MenuOptionGroup,
   MenuDivider,
   Img,
+} from "@chakra-ui/react";
+import {
+  Table,
+  Thead,
+  Tbody,
+  Tfoot,
+  Tr,
+  Th,
+  Td,
+  TableCaption,
+  TableContainer,
 } from "@chakra-ui/react";
 
 const Header = () => {
@@ -66,19 +77,27 @@ const Header = () => {
               value={searchTerm}
             />
             {searchData.length !== 0 && searchData ? (
-              <div className='absolute bg-white w-full z-10'>
-                {searchData.map((product) => {
-                  return (
-                    <div className='flex justify-between items-center p-2'>
-                      <div className='flex items-center'>
-                        <Image className=' h-8 w-8' src={product.image} />
-                        <p className='ml-2'>{product.name}</p>
-                      </div>
-                      <p className='mr-2'>${product.price}</p>
-                    </div>
-                  );
-                })}
-              </div>
+              <TableContainer maxWidth='100%'>
+                <Table className='absolute bg-white z-10' variant={"striped"}>
+                  {" "}
+                  {searchData.map((product) => {
+                    return (
+                      <Tr>
+                        <div className='flex justify-between items-center p-2'>
+                          <div className='flex items-center'>
+                            <Image
+                              className=' h-8 w-8'
+                              src={product.image_Url.url}
+                            />
+                            <p className='ml-2'>{product.name}</p>
+                          </div>
+                          <p className='mr-2'>${product.price}</p>
+                        </div>
+                      </Tr>
+                    );
+                  })}
+                </Table>
+              </TableContainer>
             ) : null}
             <span className='inline-block absolute right-[4%] cursor-pointer top-0 mt-2 mr-2'>
               <BsSearch className='inline-block  ' />
@@ -202,12 +221,43 @@ const Header = () => {
             </MenuList>
           </Menu>
           <div className='nav_options'>
-            <ul className=' flex gap-6 font-semibold text-white'>
-              <li>Home</li>
-              <li>Best Selling</li>
-              <li>Products</li>
-              <li>Events</li>
-              <li>FAQ</li>
+            <ul className=' flex gap-6 font-semibold'>
+              <NavLink
+                to='/'
+                className={({ isActive }) =>
+                  isActive ? " text-green-500 " : " text-white"
+                }>
+                Home
+              </NavLink>
+              <NavLink
+                to='/bestselling'
+                className={({ isActive }) =>
+                  isActive ? " text-green-500 " : " text-white"
+                }>
+                Best selling
+              </NavLink>
+
+              <NavLink
+                to='/products'
+                className={({ isActive }) =>
+                  isActive ? " text-green-500 " : " text-white"
+                }>
+                Products
+              </NavLink>
+              <NavLink
+                to='/EVENTS'
+                className={({ isActive }) =>
+                  isActive ? " text-green-500 " : " text-white"
+                }>
+                Events
+              </NavLink>
+              <NavLink
+                to='/FAQ'
+                className={({ isActive }) =>
+                  isActive ? " text-green-500 " : " text-white"
+                }>
+                FAQ
+              </NavLink>
             </ul>
           </div>
           <div className='cartoptions'>
