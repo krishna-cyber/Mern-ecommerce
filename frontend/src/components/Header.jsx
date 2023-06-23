@@ -9,7 +9,7 @@ import { AiOutlineHeart } from "react-icons/ai";
 import { FaRegUserCircle } from "react-icons/fa";
 import { Image } from "@chakra-ui/react";
 import { productData } from "../static/data";
-
+import { Badge } from "@chakra-ui/react";
 import {
   Button,
   Menu,
@@ -265,11 +265,17 @@ const Header = () => {
               <li>
                 <Link to='/wishlist'>
                   <AiOutlineHeart className='inline-block text-2xl' />
+                  <Badge colorScheme='green' variant='solid' className='ml-1'>
+                    0
+                  </Badge>
                 </Link>
               </li>
               <li>
                 <Link to='/cart'>
                   <BiCartAlt className='inline-block text-2xl' />
+                  <Badge colorScheme='green' variant='solid' className='ml-1'>
+                    0
+                  </Badge>
                 </Link>
               </li>
               <li>

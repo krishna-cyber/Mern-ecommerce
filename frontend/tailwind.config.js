@@ -1,4 +1,8 @@
-/** @type {import('tailwindcss').Config} */
+/**
+ * @format
+ * @type {import('tailwindcss').Config}
+ */
+
 export default {
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
@@ -7,7 +11,11 @@ export default {
       Roboto: ["Roboto", "sans-serif"],
       Poppins: ["Poppins", "sans-serif"],
     },
-    extend: {},
+    extend: {
+      backgroundImage: {
+        'hero': "URL('https://themes.rslahmed.dev/rafcart/assets/images/banner-2.jpg')"
+      },
+    },
   },
   plugins: [],
 };

@@ -328,3 +328,42 @@ export const productData = [
     stock: 10,
   },
 ];
+
+
+export const categoryData = [
+  {
+    id: 1,
+    name: "Computers & Laptop",
+    image_Url: 'https://www.istorebangladesh.com/images/thumbs/0000286_macbook-pro-m1_550.png'
+  },
+  {
+    id: 2,
+    name: "Mobile & Tablets",
+    image_Url: 'https://m.media-amazon.com/images/I/31Vle5fVdaL.jpg'
+  },
+  {
+    id: 3,
+    name: "Music & Gaming",
+    image_Url: 'https://www.startech.com.bd/image/cache/catalog/headphone/havit/h763d/h763d-02-500x500.jpg'
+  },
+  {
+    id: 4,
+    name: "Shoes",
+    image_Url: 'https://mirzacdns3.s3.ap-south-1.amazonaws.com/cache/catalog/RLV0015/2-800x800.jpg'
+  },
+  {
+    id: 5,
+    name: "Cloths",
+    image_Url: 'https://i0.wp.com/eccocibd.com/wp-content/uploads/2022/01/1802NL02_1.png?fit=550%2C550&ssl=1'
+  },
+  {
+    id: 6,
+    name : "gifts",
+    image_Url: "../../public/categoriesIcon/gift.jpeg"
+  },
+  {
+    id: 7,
+    name : "Others",
+    image_Url: "../../public/categoriesIcon/icon9.webp"
+  }
+];
