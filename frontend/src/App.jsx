@@ -1,3 +1,5 @@
+/** @format */
+
 import React, { useEffect } from "react";
 import { Routes, Route } from "react-router-dom";
 import { Login, Register, Home, Forgot, ActivationPage } from "./utils/routes";
@@ -29,7 +31,7 @@ const App = () => {
       });
   }, []);
   return (
-    <div>
+    <div className=' bg-[#F6F6F5]'>
       <Routes>
         <Route path='/' element={<Home />} />
         <Route path='/login' element={<Login />} />
