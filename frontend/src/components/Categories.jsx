@@ -4,7 +4,7 @@ import React from "react";
 import styles from "../styles/styles";
 import { categoryData } from "../static/data.js";
 import Branding from "./Branding";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, createSearchParams } from "react-router-dom";
 
 const Categories = () => {
   const navigate = useNavigate();
@@ -12,7 +12,7 @@ const Categories = () => {
     e.preventDefault();
     navigate({
       pathname: "/products",
-      state: { category: category },
+      search: `?${createSearchParams(category.name)}`,
     });
   };
   return (
