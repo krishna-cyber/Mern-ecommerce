@@ -12,7 +12,7 @@ const Categories = () => {
     e.preventDefault();
     navigate({
       pathname: "/products",
-      search: `?${createSearchParams(category.name)}`,
+      search: `?categories=${createSearchParams(category.name)}`,
     });
   };
   return (
