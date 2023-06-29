@@ -10,7 +10,10 @@ const Categories = () => {
   const navigate = useNavigate();
   const handleClick = (category) => (e) => {
     e.preventDefault();
-    navigate(`/products/${category.name}`);
+    navigate({
+      pathname: "/products",
+      state: { category: category },
+    });
   };
   return (
     <>
