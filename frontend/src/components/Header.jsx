@@ -1,3 +1,5 @@
+/** @format */
+
 import React, { useState } from "react";
 import styles from "../styles/styles";
 import { Link, NavLink } from "react-router-dom";
@@ -113,7 +115,7 @@ const Header = () => {
           </div>
         </div>
       </div>
-      <nav className=' bg-[#332AC8] pt-4 '>
+      <nav className=' bg-[#332AC8] pt-4 sticky top-0 '>
         <div className='nav_options flex justify-between w-11/12 mx-auto'>
           <Menu>
             <MenuButton
