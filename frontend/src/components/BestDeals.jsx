@@ -1,6 +1,8 @@
 /** @format */
 import { productData } from "../static/data";
 import styles from "../styles/styles";
+import { productDetail } from "../reducers/modalProduct";
+import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import React, { useEffect, useState } from "react";
 import { AiOutlineHeart } from "react-icons/ai";
@@ -21,8 +23,14 @@ import {
 } from "@chakra-ui/react";
 
 const BestDeals = () => {
+  const dispatch = useDispatch();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const navigate = useNavigate();
+  const handleModal = () => {
+    //that can send data to modal
+
+    onOpen();
+  };
   useEffect(() => {
     //sort from product data having highest sell 5 items in descending order
 
@@ -52,7 +60,7 @@ const BestDeals = () => {
                 <div className=' ml-auto w-fit flex flex-col gap-3'>
                   <AiOutlineHeart className='text-2xl cursor-pointer' />
                   <AiOutlineEye
-                    onClick={onOpen}
+                    onClick={handleModal}
                     className='text-2xl cursor-pointer'
                   />
                   <AiOutlineShoppingCart className='text-2xl cursor-pointer' />
@@ -134,7 +142,7 @@ const BestDeals = () => {
           );
         })}
       </div>
-      <Modal isOpen={isOpen} onClose={onClose}>
+      <Modal isOpen={isOpen} isCentered={true} size='xl' onClose={onClose}>
         <ModalOverlay />
         <ModalContent>
           <ModalHeader>Modal Title</ModalHeader>
