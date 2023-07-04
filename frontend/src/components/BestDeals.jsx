@@ -8,7 +8,20 @@ import { AiOutlineEye } from "react-icons/ai";
 import { AiOutlineShoppingCart } from "react-icons/ai";
 import { AiFillStar } from "react-icons/ai";
 import { AiOutlineStar } from "react-icons/ai";
+import {
+  Modal,
+  ModalOverlay,
+  ModalContent,
+  ModalHeader,
+  ModalFooter,
+  ModalBody,
+  Button,
+  ModalCloseButton,
+  useDisclosure,
+} from "@chakra-ui/react";
+
 const BestDeals = () => {
+  const { isOpen, onOpen, onClose } = useDisclosure();
   const navigate = useNavigate();
   useEffect(() => {
     //sort from product data having highest sell 5 items in descending order
@@ -28,16 +41,9 @@ const BestDeals = () => {
         {data.map((item) => {
           return (
             <div
-              className='bg-white w-1/5 flex flex-col items-center p-4 rounded-md shadow-md cursor-pointer'
+              className='bg-white w-1/5 flex flex-col items-center p-4 rounded-md shadow-md'
               key={item.id}>
-              <span
-                className=' flex w-[70%] '
-                onClick={
-                  //with product name navigate to product page replace space with -
-                  () => {
-                    navigate(`/product/${item.name.replace(/ /g, "-")}`);
-                  }
-                }>
+              <span className=' flex w-[70%] '>
                 <img
                   src={item.image_Url[0].url}
                   className=' w-36 h-36'
@@ -45,12 +51,22 @@ const BestDeals = () => {
                 />
                 <div className=' ml-auto w-fit flex flex-col gap-3'>
                   <AiOutlineHeart className='text-2xl cursor-pointer' />
-                  <AiOutlineEye className='text-2xl cursor-pointer' />
+                  <AiOutlineEye
+                    onClick={onOpen}
+                    className='text-2xl cursor-pointer'
+                  />
                   <AiOutlineShoppingCart className='text-2xl cursor-pointer' />
                 </div>
               </span>
 
-              <div className='card-body'>
+              <div
+                className='card-body cursor-pointer'
+                onClick={
+                  //with product name navigate to product page replace space with -
+                  () => {
+                    navigate(`/product/${item.name.replace(/ /g, "-")}`);
+                  }
+                }>
                 <p className=' text-blue-500 pt-4 cursor-pointer'>
                   {item.shop.name}
                 </p>
@@ -118,6 +134,21 @@ const BestDeals = () => {
           );
         })}
       </div>
+      <Modal isOpen={isOpen} onClose={onClose}>
+        <ModalOverlay />
+        <ModalContent>
+          <ModalHeader>Modal Title</ModalHeader>
+          <ModalCloseButton />
+          <ModalBody>hello from model.</ModalBody>
+
+          <ModalFooter>
+            <Button colorScheme='blue' mr={3} onClick={onClose}>
+              Close
+            </Button>
+            <Button variant='ghost'>Secondary Action</Button>
+          </ModalFooter>
+        </ModalContent>
+      </Modal>
     </div>
   );
 };
