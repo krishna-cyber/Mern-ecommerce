@@ -1,6 +1,7 @@
 /** @format */
 import { productData } from "../static/data";
 import styles from "../styles/styles";
+import { useNavigate } from "react-router-dom";
 import React, { useEffect, useState } from "react";
 import { AiOutlineHeart } from "react-icons/ai";
 import { AiOutlineEye } from "react-icons/ai";
@@ -8,6 +9,7 @@ import { AiOutlineShoppingCart } from "react-icons/ai";
 import { AiFillStar } from "react-icons/ai";
 import { AiOutlineStar } from "react-icons/ai";
 const BestDeals = () => {
+  const navigate = useNavigate();
   useEffect(() => {
     //sort from product data having highest sell 5 items in descending order
 
@@ -26,9 +28,16 @@ const BestDeals = () => {
         {data.map((item) => {
           return (
             <div
-              className='bg-white w-1/5 flex flex-col items-center p-4 rounded-md shadow-md'
+              className='bg-white w-1/5 flex flex-col items-center p-4 rounded-md shadow-md cursor-pointer'
               key={item.id}>
-              <span className=' flex w-[70%]'>
+              <span
+                className=' flex w-[70%] '
+                onClick={
+                  //with product name navigate to product page replace space with -
+                  () => {
+                    navigate(`/product/${item.name.replace(/ /g, "-")}`);
+                  }
+                }>
                 <img
                   src={item.image_Url[0].url}
                   className=' w-36 h-36'

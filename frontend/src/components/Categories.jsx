@@ -25,9 +25,9 @@ const Categories = () => {
               return (
                 <>
                   {" "}
-                  <div className=' w-[25%]  p-2'>
+                  <div className=' w-[25%]  p-2 px-8c'>
                     <span
-                      className='flex items-center w-fit cursor-pointer'
+                      className='flex items-center justify-center w-fit cursor-pointer'
                       onClick={handleClick(category)}>
                       {" "}
                       <img
