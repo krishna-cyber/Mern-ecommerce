@@ -20,13 +20,14 @@ import {
   Button,
   ModalCloseButton,
   Flex,
+  Tooltip,
   Spacer,
   Container,
   useDisclosure,
 } from "@chakra-ui/react";
 
 const BestDeals = () => {
-  const [modalProduct, setModalProduct] = useState({});
+  const [modalProduct, setModalProduct] = useState(null);
   const dispatch = useDispatch();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const navigate = useNavigate();
@@ -146,33 +147,61 @@ const BestDeals = () => {
           );
         })}
       </div>
-      <Modal isOpen={isOpen} isCentered={true} size='xl' onClose={onClose}>
-        <ModalOverlay />
-        <ModalContent>
-          <ModalCloseButton />
-          <ModalBody>
-            <Flex>
-              <div>
-                <ModalHeader>{modalProduct.name}</ModalHeader>
-              </div>
-            </Flex>
-          </ModalBody>
+      //only if we have some data in modalProduct then show modal
+      {modalProduct && (
+        <Modal isOpen={isOpen} isCentered={true} size='4xl' onClose={onClose}>
+          <ModalOverlay />
+          <ModalContent>
+            <ModalCloseButton />
+            <ModalBody>
+              <Flex>
+                <div className='w-1/2'>
+                  <img
+                    className='fit-content'
+                    src={modalProduct.image_Url[0].url}
+                    alt={modalProduct.image_Url[0].url}
+                  />
+                </div>
+                <div className=' w-1/2'>
+                  <ModalHeader>{modalProduct.name}</ModalHeader>
+                  <p>{modalProduct.description}</p>
+                  <p className=' flex justify-between text-lg mt-3'>
+                    <span className=' text-blue-500 font-semibold flex gap-7 items-center text-2xl'>
+                      {modalProduct.price}$
+                      <Tooltip label='Add to wishlist' aria-label='A tooltip'>
+                        <AiOutlineHeart className=' text-red-500 cursor-pointer' />
+                      </Tooltip>
+                    </span>
+                    <span className=' text-green-600 font-semibold'>
+                      {modalProduct.total_sell} Sold
+                    </span>
+                  </p>
+                </div>
+              </Flex>
+            </ModalBody>
 
-          <ModalFooter>
-            <Button
-              className=' flex gap-3'
-              _hover={"none"}
-              color={"white"}
-              background={"black"}
-              mr={3}
-              onClick={onClose}>
-              Add To Cart
-              <AiOutlineShoppingCart className='text-2xl' />
-            </Button>
-            <Button variant='ghost'>Secondary Action</Button>
-          </ModalFooter>
-        </ModalContent>
-      </Modal>
+            <ModalFooter>
+              <Button
+                className=' flex gap-3'
+                _hover={"none"}
+                color={"white"}
+                background={"black"}
+                mr={3}
+                onClick={onClose}>
+                Add To Cart
+                <AiOutlineShoppingCart className='text-2xl' />
+              </Button>
+              <Button
+                className=' flex gap-3'
+                variant={"ghost"}
+                mr={3}
+                onClick={onClose}>
+                Close
+              </Button>
+            </ModalFooter>
+          </ModalContent>
+        </Modal>
+      )}
     </div>
   );
 };
