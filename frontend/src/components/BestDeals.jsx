@@ -19,18 +19,18 @@ import {
   ModalBody,
   Button,
   ModalCloseButton,
+  Flex,
+  Spacer,
+  Container,
   useDisclosure,
 } from "@chakra-ui/react";
 
 const BestDeals = () => {
+  const [modalProduct, setModalProduct] = useState({});
   const dispatch = useDispatch();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const navigate = useNavigate();
-  const handleModal = () => {
-    //that can send data to modal
 
-    onOpen();
-  };
   useEffect(() => {
     //sort from product data having highest sell 5 items in descending order
 
@@ -60,7 +60,11 @@ const BestDeals = () => {
                 <div className=' ml-auto w-fit flex flex-col gap-3'>
                   <AiOutlineHeart className='text-2xl cursor-pointer' />
                   <AiOutlineEye
-                    onClick={handleModal}
+                    onClick={() => {
+                      setModalProduct(item);
+                      dispatch(productDetail(item));
+                      onOpen();
+                    }}
                     className='text-2xl cursor-pointer'
                   />
                   <AiOutlineShoppingCart className='text-2xl cursor-pointer' />
@@ -145,13 +149,25 @@ const BestDeals = () => {
       <Modal isOpen={isOpen} isCentered={true} size='xl' onClose={onClose}>
         <ModalOverlay />
         <ModalContent>
-          <ModalHeader>Modal Title</ModalHeader>
           <ModalCloseButton />
-          <ModalBody>hello from model.</ModalBody>
+          <ModalBody>
+            <Flex>
+              <div>
+                <ModalHeader>{modalProduct.name}</ModalHeader>
+              </div>
+            </Flex>
+          </ModalBody>
 
           <ModalFooter>
-            <Button colorScheme='blue' mr={3} onClick={onClose}>
-              Close
+            <Button
+              className=' flex gap-3'
+              _hover={"none"}
+              color={"white"}
+              background={"black"}
+              mr={3}
+              onClick={onClose}>
+              Add To Cart
+              <AiOutlineShoppingCart className='text-2xl' />
             </Button>
             <Button variant='ghost'>Secondary Action</Button>
           </ModalFooter>
