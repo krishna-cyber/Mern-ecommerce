@@ -147,7 +147,6 @@ const BestDeals = () => {
           );
         })}
       </div>
-      //only if we have some data in modalProduct then show modal
       {modalProduct && (
         <Modal isOpen={isOpen} isCentered={true} size='4xl' onClose={onClose}>
           <ModalOverlay />
