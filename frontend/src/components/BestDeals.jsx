@@ -148,7 +148,12 @@ const BestDeals = () => {
         })}
       </div>
       {modalProduct && (
-        <Modal isOpen={isOpen} isCentered={true} size='4xl' onClose={onClose}>
+        <Modal
+          blockScrollOnMount={false}
+          isOpen={isOpen}
+          isCentered={true}
+          size='4xl'
+          onClose={onClose}>
           <ModalOverlay />
           <ModalContent>
             <ModalCloseButton />
@@ -156,10 +161,26 @@ const BestDeals = () => {
               <Flex>
                 <div className='w-1/2'>
                   <img
-                    className='fit-content'
+                    className=' object-fill'
                     src={modalProduct.image_Url[0].url}
                     alt={modalProduct.image_Url[0].url}
                   />
+                  <span className=' flex items-center gap-2 mt-4'>
+                    {" "}
+                    <img
+                      src={modalProduct.shop.shop_avatar.url}
+                      className=' object-fill h-12 w-12 rounded-full'
+                      alt=''
+                    />
+                    <p className=' text-blue-500 text-lg'>
+                      {modalProduct.shop.name.length > 20
+                        ? modalProduct.shop.name.slice(0, 20) + "..."
+                        : modalProduct.shop.name}
+                      <p className=' font-extralight text-md text-black'>
+                        ({modalProduct.rating}) rating
+                      </p>
+                    </p>
+                  </span>
                 </div>
                 <div className=' w-1/2'>
                   <ModalHeader>{modalProduct.name}</ModalHeader>
@@ -168,7 +189,10 @@ const BestDeals = () => {
                     <span className=' text-blue-500 font-semibold flex gap-7 items-center text-2xl'>
                       {modalProduct.price}$
                       <Tooltip label='Add to wishlist' aria-label='A tooltip'>
-                        <AiOutlineHeart className=' text-red-500 cursor-pointer' />
+                        <span>
+                          {" "}
+                          <AiOutlineHeart className=' text-red-500 cursor-pointer' />
+                        </span>
                       </Tooltip>
                     </span>
                     <span className=' text-green-600 font-semibold'>
