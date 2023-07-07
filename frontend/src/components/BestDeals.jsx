@@ -195,6 +195,28 @@ const BestDeals = () => {
                         </span>
                       </Tooltip>
                     </span>
+                    <span>
+                      {/* two buttons middle input field with incrementor and decrementor
+                       */}
+                      <Container
+                        className=' flex justify-between items-center'
+                        maxW='sm'
+                        centerContent>
+                        <Spacer />
+                        <Button
+                          className=' flex gap-3'
+                          variant={"ghost"}
+                          mr={3}>
+                          <span className=' text-2xl'>-</span>
+                          <input
+                            className=' w-10 text-center'
+                            type='text'
+                            value='1'
+                          />
+                          <span className=' text-2xl'>+</span>
+                        </Button>
+                      </Container>
+                    </span>
                     <span className=' text-green-600 font-semibold'>
                       {modalProduct.total_sell} Sold
                     </span>
