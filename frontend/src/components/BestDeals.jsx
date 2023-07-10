@@ -1,12 +1,9 @@
 /** @format */
 import { productData } from "../static/data";
 import styles from "../styles/styles";
-import { useDispatch } from "react-redux";
+
 import { useNavigate } from "react-router-dom";
 import React, { useEffect, useState } from "react";
-import { AiOutlineHeart } from "react-icons/ai";
-
-import { AiOutlineShoppingCart } from "react-icons/ai";
 
 import ProductCard from "./ProductCard";
 import {
@@ -44,7 +41,7 @@ const BestDeals = () => {
   return (
     <div className={`${styles.section}  mt-4`}>
       <h1 className=' font-semibold text-xl my-4'>Best Deals</h1>
-      <div className='flex gap-4 '>
+      <div className='flex gap-4 justify-between '>
         {data.map((item) => {
           return <ProductCard item={item} />;
         })}

@@ -30,7 +30,7 @@ const ProductCard = ({ item }) => {
   const navigate = useNavigate();
   return (
     <div
-      className='bg-white w-1/5 flex flex-col items-center p-4 rounded-md shadow-md'
+      className='bg-white w-[18%] flex flex-col items-center p-4 rounded-md shadow-md'
       key={item.id}>
       <span className=' flex w-[70%] '>
         <img
