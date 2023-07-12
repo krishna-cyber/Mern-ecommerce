@@ -2,7 +2,7 @@
 
 import React from "react";
 import styles from "../styles/styles";
-
+import { AiOutlineArrowRight } from "react-icons/ai";
 const EventSection = () => {
   return (
     <div className={styles.section}>
@@ -10,7 +10,7 @@ const EventSection = () => {
       <div className='w-full bg-white p-4'>
         <div className=' flex justify-between'>
           <img
-            className=' w-full m-auto  lg:w-[50%]'
+            className=' w-full m-auto  lg:w-[40%] object-cover rounded-md'
             src='https://m.media-amazon.com/images/I/31Vle5fVdaL.jpg'
             alt=''
           />
@@ -44,8 +44,10 @@ const EventSection = () => {
                 See Details
               </button>
             </span>
-            <div>
-              <p>See More Events --></p>
+            <div className=' flex justify-end'>
+              <p className='  text-green-800 flex items-center gap-3 hover:text-green-500 cursor-pointer'>
+                See More Events <AiOutlineArrowRight />{" "}
+              </p>
             </div>
           </div>
         </div>
