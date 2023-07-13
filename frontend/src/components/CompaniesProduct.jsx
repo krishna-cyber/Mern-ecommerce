@@ -14,14 +14,14 @@ const CompaniesProduct = () => {
           alt=''
         />
       </span>
-      <span className=' w-[20%]'>
+      <span className=' w-[20%] flex justify-center'>
         <img
           className='w-[50%] object-contain'
           src='https://logos-world.net/wp-content/uploads/2020/04/Sony-Logo.png'
           alt=''
         />
       </span>
-      <span className=' w-[20%]'>
+      <span className=' w-[20%] flex justify-center'>
         <img
           className='w-[50%] object-contain'
           src='https://upload.wikimedia.org/wikipedia/commons/thumb/b/bf/LG_logo_%282015%29.svg/2560px-LG_logo_%282015%29.svg.png'
@@ -30,14 +30,14 @@ const CompaniesProduct = () => {
       </span>
       <span className=' w-[20%]'>
         <img
-          className='w-[50%] object-contain'
+          className='w-[50%] object-contain flex justify-center'
           src='https://www.vectorlogo.zone/logos/apple/apple-ar21.png'
           alt=''
         />
       </span>
       <span className=' w-[20%]'>
         <img
-          className='w-[50%] object-contain'
+          className='w-[50%] object-contain flex justify-center'
           src='https://www.vectorlogo.zone/logos/microsoft/microsoft-ar21.svg'
           alt=''
         />
