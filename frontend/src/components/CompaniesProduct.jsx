@@ -6,7 +6,7 @@ import styles from "../styles/styles";
 const CompaniesProduct = () => {
   return (
     <div
-      className={`${styles.section} bg-white px-4 flex justify-between items-center`}>
+      className={`${styles.section} bg-white px-4 rounded-lg flex justify-between items-center`}>
       <span className=' w-[20%] flex justify-center'>
         <img
           className='max-w-[50%] h-auto object-contain'
