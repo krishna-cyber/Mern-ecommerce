@@ -7,6 +7,7 @@ import Categories from "../components/Categories";
 import BestDeals from "../components/BestDeals";
 import FeatureProduct from "../components/FeatureProduct.jsx";
 import EventSection from "../components/EventSection";
+import CompaniesProduct from "../components/CompaniesProduct";
 
 const Home = () => {
   return (
@@ -17,6 +18,7 @@ const Home = () => {
       <BestDeals />
       <EventSection />
       <FeatureProduct />
+      <CompaniesProduct />
     </div>
   );
 };
