@@ -10,9 +10,25 @@ import { AiFillInstagram } from "react-icons/ai";
 const Footer = () => {
   return (
     <>
-      <div className=' bg-purple-700'>
-        <div className={`${styles.section}`}>
-          <h4>Subscripe us for more news and events.</h4>
+      <div className=' bg-[#342AC8] text-white'>
+        <div
+          className={`${styles.section} mb-0 p-5 flex justify-between items-center`}>
+          <h4 className='text-4xl'>
+            <span className=' text-[#56D881] '>Subscribe</span> us for more news{" "}
+            and <br></br> events.
+          </h4>
+          <form action='' className=' flex gap-4 h-fit'>
+            <input
+              type='text'
+              placeholder='Enter your email'
+              className=' p-2 rounded-md text-black outline-none'
+            />
+            <input
+              type='submit'
+              value='Subscribe'
+              className=' p-2 rounded-md bg-[#56D881] text-white cursor-pointer'
+            />
+          </form>
         </div>
       </div>
       <footer className={` p-4 bg-black text-white`}>
