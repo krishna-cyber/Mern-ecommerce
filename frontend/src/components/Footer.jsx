@@ -10,7 +10,11 @@ import { AiFillInstagram } from "react-icons/ai";
 const Footer = () => {
   return (
     <>
-      <div className='subscription'></div>
+      <div className=' bg-purple-700'>
+        <div className={`${styles.section}`}>
+          <h4>Subscripe us for more news and events.</h4>
+        </div>
+      </div>
       <footer className={` p-4 bg-black text-white`}>
         <div
           className={`${styles.section} mt-4 flex justify-between flex-wrap`}>
@@ -100,6 +104,13 @@ const Footer = () => {
               </li>
             </ul>
           </span>
+        </div>
+        <div className='flex justify-center items-center'>
+          {/* show year with copyright  */}
+
+          <p className='text-sm text-slate-100'>
+            &copy; {new Date().getFullYear()} All Rights Reserved
+          </p>
         </div>
       </footer>
     </>
