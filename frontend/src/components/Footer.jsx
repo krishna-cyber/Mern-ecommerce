@@ -1,4 +1,5 @@
 /** @format */
+//footer component
 
 import React from "react";
 import styles from "../styles/styles";
