@@ -9,6 +9,7 @@ import FeatureProduct from "../components/FeatureProduct.jsx";
 import EventSection from "../components/EventSection";
 import CompaniesProduct from "../components/CompaniesProduct";
 import Footer from "../components/Footer";
+import FAQ from "../components/FAQ";
 
 const Home = () => {
   return (
@@ -21,6 +22,7 @@ const Home = () => {
       <FeatureProduct />
       <CompaniesProduct />
       <Footer />
+      {/* <FAQ /> */}
     </div>
   );
 };
