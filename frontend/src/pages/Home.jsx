@@ -12,28 +12,26 @@ import {
   Footer,
   FAQ,
 } from "../Routes/route.js";
-// import Header from "../components/Header";
-// import Hero from "../components/Hero";
-// import Categories from "../components/Categories";
-// import BestDeals from "../components/BestDeals";
-// import FeatureProduct from "../components/FeatureProduct.jsx";
-// import EventSection from "../components/EventSection";
-// import CompaniesProduct from "../components/CompaniesProduct";
-// import Footer from "../components/Footer";
-// import FAQ from "../components/FAQ";
 
-const Home = () => {
+const Home = ({ path }) => {
   return (
     <div>
       <Header />
-      <Hero />
-      <Categories />
-      <BestDeals />
-      <EventSection />
-      <FeatureProduct />
-      <CompaniesProduct />
+      {/* SHOW FAQ component when /faq other wise show home */}
+      {path && path === "faq" ? (
+        <FAQ />
+      ) : (
+        <>
+          {" "}
+          <Hero />
+          <Categories />
+          <BestDeals />
+          <EventSection />
+          <FeatureProduct />
+          <CompaniesProduct />
+        </>
+      )}
       <Footer />
-      {/* <FAQ /> */}
     </div>
   );
 };

@@ -34,6 +34,7 @@ const App = () => {
     <div className=' bg-[#F6F6F5]'>
       <Routes>
         <Route path='/' element={<Home />} />
+        <Route path='/Faq' element={<Home path='faq' />} />
         <Route path='/login' element={<Login />} />
         <Route path='/signup' element={<Register />} />
         <Route path='/forgot-password' element={<Forgot />} />
