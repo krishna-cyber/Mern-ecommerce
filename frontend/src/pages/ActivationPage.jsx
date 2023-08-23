@@ -1,6 +1,9 @@
+/** @format */
+
 import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { activationServer } from "../utils/server";
+
 const ActivationPage = () => {
   const { activation_token } = useParams();
   const [err, setErr] = useState("");

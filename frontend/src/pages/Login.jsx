@@ -1,6 +1,8 @@
+/** @format */
+
 import React from "react";
 import { useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { CiWarning } from "react-icons/ci";
 import { loginServer } from "../utils/server";
 import { toast } from "react-toastify";
@@ -13,6 +15,8 @@ import {
 import { useDispatch } from "react-redux";
 
 const Login = () => {
+  const navigate = useNavigate();
+
   const dispatch = useDispatch();
   const {
     register,
@@ -20,6 +24,7 @@ const Login = () => {
     watch,
     formState: { errors },
   } = useForm();
+
   const onSubmit = (data) => {
     dispatch(loginRequest());
     loginServer
@@ -27,6 +32,7 @@ const Login = () => {
       .then((res) => {
         toast.success(res.data.message);
         delete res.data.message;
+        navigate("/");
         dispatch(loginSuccess(res.data));
       })
       .catch((err) => {
