@@ -2,7 +2,15 @@
 
 import React, { useEffect } from "react";
 import { Routes, Route } from "react-router-dom";
-import { Login, Register, Home, Forgot, ActivationPage } from "./utils/routes";
+import {
+  Login,
+  Register,
+  Home,
+  Forgot,
+  ActivationPage,
+  Faq,
+  Products,
+} from "./utils/routes";
 import { useSelector, useDispatch } from "react-redux";
 import {
   loginRequest,
@@ -34,11 +42,14 @@ const App = () => {
     <div className=' bg-[#F6F6F5]'>
       <Routes>
         <Route path='/' element={<Home />} />
-        <Route path='/Faq' element={<Home path='faq' />} />
+        <Route path='/Faq' element={<Faq />} />
         <Route path='/login' element={<Login />} />
         <Route path='/signup' element={<Register />} />
         <Route path='/forgot-password' element={<Forgot />} />
-        <Route path='/products' element={<Home path='products' />} />
+        <Route path='/products' element={<Products />} />
+        {/* according to search params */}
+        <Route path='/products/?search' element={<Home path='products' />} />
+
         <Route
           path='/activate/:activation_token'
           element={<ActivationPage />}

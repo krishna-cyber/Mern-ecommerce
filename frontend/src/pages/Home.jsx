@@ -21,30 +21,15 @@ const Home = ({ path }) => {
   return (
     <div>
       <Header />
-      {/* SHOW FAQ component when /faq other wise show home */}
-      {path && path === "faq" ? (
-        <FAQ />
-      ) : path === "products" ? (
-        productData && (
-          <div className={`${styles.section}  mt-4 mx-auto`}>
-            <h1 className=' font-semibold text-xl my-4'>All Products</h1>
-            <div className=' flex gap-4  flex-wrap justify-between w-full'>
-              {productData.map((item) => {
-                return <ProductCard item={item} />;
-              })}
-            </div>
-          </div>
-        )
-      ) : (
-        <>
-          <Hero />
-          <Branding />
-          <BestDeals />
-          <EventSection />
-          <FeatureProduct />
-          <CompaniesProduct />
-        </>
-      )}
+
+      <>
+        <Hero />
+        <Branding />
+        <BestDeals />
+        <EventSection />
+        <FeatureProduct />
+        <CompaniesProduct />
+      </>
       <Footer />
     </div>
   );
