@@ -2,7 +2,7 @@
 
 import Header from "../components/Header";
 import Hero from "../components/Hero";
-import Categories from "../components/Categories";
+import Branding from "../components/Branding";
 import BestDeals from "../components/BestDeals";
 import FeatureProduct from "../components/FeatureProduct.jsx";
 import EventSection from "../components/EventSection";
@@ -13,7 +13,7 @@ import FAQ from "../components/FAQ";
 export {
   Header,
   Hero,
-  Categories,
+  Branding,
   BestDeals,
   FeatureProduct,
   EventSection,

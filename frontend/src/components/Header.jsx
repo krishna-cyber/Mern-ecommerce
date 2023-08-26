@@ -12,6 +12,7 @@ import { FaRegUserCircle } from "react-icons/fa";
 import { Image } from "@chakra-ui/react";
 import { productData } from "../static/data";
 import { Badge } from "@chakra-ui/react";
+import { useSearchParams } from "react-router-dom";
 import {
   Button,
   Menu,
@@ -24,19 +25,10 @@ import {
   MenuDivider,
   Img,
 } from "@chakra-ui/react";
-import {
-  Table,
-  Thead,
-  Tbody,
-  Tfoot,
-  Tr,
-  Th,
-  Td,
-  TableCaption,
-  TableContainer,
-} from "@chakra-ui/react";
+import { Table, Tr, TableContainer } from "@chakra-ui/react";
 
 const Header = () => {
+  const [searchParams, setSearchParams] = useSearchParams();
   const [searchTerm, setSearchTerm] = useState("");
   const [searchData, setSearchData] = useState([]);
   const handleSearchChange = (e) => {
@@ -117,6 +109,7 @@ const Header = () => {
       </div>
       <nav className=' bg-[#332AC8] pt-4 sticky top-0 '>
         <div className='nav_options flex justify-between w-11/12 mx-auto'>
+          {/* Categories menu starts here */}
           <Menu>
             <MenuButton
               size={"lg"}
@@ -131,6 +124,9 @@ const Header = () => {
             </MenuButton>
             <MenuList>
               <MenuItem
+                onClick={() =>
+                  setSearchParams({ category: "Computers and Laptops" })
+                }
                 icon={
                   <Image
                     className=' h-8 w-8'
@@ -140,6 +136,9 @@ const Header = () => {
                 Computers and Laptops
               </MenuItem>
               <MenuItem
+                onClick={() =>
+                  setSearchParams({ category: "Cosmetics and Body care" })
+                }
                 icon={
                   <Image
                     className=' h-8 w-8'
@@ -149,6 +148,7 @@ const Header = () => {
                 Cosmetics and Body care
               </MenuItem>
               <MenuItem
+                onClick={() => setSearchParams({ category: "accesories" })}
                 icon={
                   <Image
                     className=' h-8 w-8'
@@ -158,6 +158,7 @@ const Header = () => {
                 Accesories
               </MenuItem>
               <MenuItem
+                onClick={() => setSearchParams({ category: "cloths" })}
                 icon={
                   <Image
                     className=' h-8 w-8'
@@ -167,6 +168,7 @@ const Header = () => {
                 Cloths
               </MenuItem>
               <MenuItem
+                onClick={() => setSearchParams({ category: "shoes" })}
                 icon={
                   <Image
                     className=' h-8 w-8'
@@ -176,6 +178,7 @@ const Header = () => {
                 Shoes
               </MenuItem>
               <MenuItem
+                onClick={() => setSearchParams({ category: "Gifts" })}
                 icon={
                   <Image
                     className=' h-8 w-8'
@@ -185,6 +188,7 @@ const Header = () => {
                 Gifts
               </MenuItem>
               <MenuItem
+                onClick={() => setSearchParams({ category: "pet care" })}
                 icon={
                   <Image
                     className=' h-8 w-8'
@@ -194,6 +198,9 @@ const Header = () => {
                 Pet Care
               </MenuItem>
               <MenuItem
+                onClick={() =>
+                  setSearchParams({ category: "Mobile and tablets" })
+                }
                 icon={
                   <Image
                     className=' h-8 w-8'
@@ -203,6 +210,9 @@ const Header = () => {
                 Mobile and Tablets
               </MenuItem>
               <MenuItem
+                onClick={() =>
+                  setSearchParams({ category: "Music and Gaming" })
+                }
                 icon={
                   <Image
                     className=' h-8 w-8'
@@ -212,6 +222,7 @@ const Header = () => {
                 Music and Gaming
               </MenuItem>
               <MenuItem
+                onClick={() => setSearchParams({ category: "others" })}
                 icon={
                   <Image
                     className=' h-8 w-8'
@@ -222,6 +233,7 @@ const Header = () => {
               </MenuItem>
             </MenuList>
           </Menu>
+
           <div className='nav_options'>
             <ul className=' flex gap-6 font-semibold'>
               <NavLink

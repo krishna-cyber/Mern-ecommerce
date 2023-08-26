@@ -7,7 +7,7 @@ import ProductCard from "../components/ProductCard.jsx";
 import {
   Header,
   Hero,
-  Categories,
+  Branding,
   BestDeals,
   FeatureProduct,
   EventSection,
@@ -38,7 +38,7 @@ const Home = ({ path }) => {
       ) : (
         <>
           <Hero />
-          <Categories />
+          <Branding />
           <BestDeals />
           <EventSection />
           <FeatureProduct />
