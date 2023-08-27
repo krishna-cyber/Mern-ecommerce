@@ -12,7 +12,7 @@ import { FaRegUserCircle } from "react-icons/fa";
 import { Image } from "@chakra-ui/react";
 import { productData } from "../static/data";
 import { Badge } from "@chakra-ui/react";
-import { useSearchParams } from "react-router-dom";
+import { createSearchParams, useNavigate } from "react-router-dom";
 import {
   Button,
   Menu,
@@ -28,7 +28,7 @@ import {
 import { Table, Tr, TableContainer } from "@chakra-ui/react";
 
 const Header = () => {
-  const [searchParams, setSearchParams] = useSearchParams();
+  const navigate = useNavigate();
   const [searchTerm, setSearchTerm] = useState("");
   const [searchData, setSearchData] = useState([]);
   const handleSearchChange = (e) => {
@@ -222,7 +222,12 @@ const Header = () => {
                 Music and Gaming
               </MenuItem>
               <MenuItem
-                onClick={() => setSearchParams({ category: "others" })}
+                onClick={() =>
+                  navigate({
+                    pathname: "/products",
+                    search: `?${createSearchParams({ category: "Others" })}`,
+                  })
+                }
                 icon={
                   <Image
                     className=' h-8 w-8'

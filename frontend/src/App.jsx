@@ -47,9 +47,6 @@ const App = () => {
         <Route path='/signup' element={<Register />} />
         <Route path='/forgot-password' element={<Forgot />} />
         <Route path='/products' element={<Products />} />
-        {/* according to search params */}
-        <Route path='/products/?search' element={<Home path='products' />} />
-
         <Route
           path='/activate/:activation_token'
           element={<ActivationPage />}
