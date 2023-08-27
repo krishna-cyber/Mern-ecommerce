@@ -33,7 +33,9 @@ const Products = () => {
       <Header />
       {data && data.length > 0 ? (
         <div className={`${styles.section}  mt-4 mx-auto`}>
-          <h1 className=' font-semibold text-xl my-4'>All Products</h1>
+          <h1 className=' font-semibold text-xl my-4'>
+            {categoryData ? `${categoryData}` : "All products"}
+          </h1>
           <div className=' flex gap-4  flex-wrap justify-between w-full'>
             {data.map((item) => {
               return <ProductCard key={item.id} item={item} />;
