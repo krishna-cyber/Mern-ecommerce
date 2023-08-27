@@ -1,6 +1,7 @@
 /** @format */
 
 import React, { useState } from "react";
+import { categoryData } from "../static/data";
 import styles from "../styles/styles";
 import { Link, NavLink } from "react-router-dom";
 import { BsSearch } from "react-icons/bs";
@@ -123,7 +124,27 @@ const Header = () => {
               All categories
             </MenuButton>
             <MenuList>
-              <MenuItem
+              {categoryData &&
+                categoryData.map((item) => {
+                  return (
+                    <MenuItem
+                      key={item.id}
+                      onClick={() =>
+                        navigate({
+                          pathname: "/products",
+                          search: `?${createSearchParams({
+                            category: item.name,
+                          })}`,
+                        })
+                      }
+                      icon={
+                        <Image className=' h-8 w-8' src={`${item.image_Url}`} />
+                      }>
+                      {item.name}
+                    </MenuItem>
+                  );
+                })}
+              {/* <MenuItem
                 onClick={() =>
                   navigate({
                     pathname: "/products",
@@ -282,7 +303,7 @@ const Header = () => {
                   />
                 }>
                 Others
-              </MenuItem>
+              </MenuItem> */}
             </MenuList>
           </Menu>
 
