@@ -19,7 +19,6 @@ const Products = () => {
         productData.sort((a, b) => {
           a.total_sell - b.total_sell;
         });
-      console.log(categoryData);
       setData(productData);
     } else {
       const d = productData.filter((item) => {
@@ -27,7 +26,6 @@ const Products = () => {
       });
       console.log(d);
       setData(d);
-      console.log(categoryData);
     }
   }, [categoryData]);
   return (
