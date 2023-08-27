@@ -125,7 +125,12 @@ const Header = () => {
             <MenuList>
               <MenuItem
                 onClick={() =>
-                  setSearchParams({ category: "Computers and Laptops" })
+                  navigate({
+                    pathname: "/products",
+                    search: `?${createSearchParams({
+                      category: "computers and laptops",
+                    })}`,
+                  })
                 }
                 icon={
                   <Image
@@ -137,7 +142,12 @@ const Header = () => {
               </MenuItem>
               <MenuItem
                 onClick={() =>
-                  setSearchParams({ category: "Cosmetics and Body care" })
+                  navigate({
+                    pathname: "/products",
+                    search: `?${createSearchParams({
+                      category: "cosmetics and body care",
+                    })}`,
+                  })
                 }
                 icon={
                   <Image
@@ -148,7 +158,14 @@ const Header = () => {
                 Cosmetics and Body care
               </MenuItem>
               <MenuItem
-                onClick={() => setSearchParams({ category: "accesories" })}
+                onClick={() =>
+                  navigate({
+                    pathname: "/products",
+                    search: `?${createSearchParams({
+                      category: "accesories",
+                    })}`,
+                  })
+                }
                 icon={
                   <Image
                     className=' h-8 w-8'
@@ -158,7 +175,12 @@ const Header = () => {
                 Accesories
               </MenuItem>
               <MenuItem
-                onClick={() => setSearchParams({ category: "cloths" })}
+                onClick={() =>
+                  navigate({
+                    pathname: "/products",
+                    search: `?${createSearchParams({ category: "cloths" })}`,
+                  })
+                }
                 icon={
                   <Image
                     className=' h-8 w-8'
@@ -168,7 +190,12 @@ const Header = () => {
                 Cloths
               </MenuItem>
               <MenuItem
-                onClick={() => setSearchParams({ category: "shoes" })}
+                onClick={() =>
+                  navigate({
+                    pathname: "/products",
+                    search: `?${createSearchParams({ category: "shoes" })}`,
+                  })
+                }
                 icon={
                   <Image
                     className=' h-8 w-8'
@@ -178,7 +205,12 @@ const Header = () => {
                 Shoes
               </MenuItem>
               <MenuItem
-                onClick={() => setSearchParams({ category: "Gifts" })}
+                onClick={() =>
+                  navigate({
+                    pathname: "/products",
+                    search: `?${createSearchParams({ category: "gifts" })}`,
+                  })
+                }
                 icon={
                   <Image
                     className=' h-8 w-8'
@@ -188,7 +220,12 @@ const Header = () => {
                 Gifts
               </MenuItem>
               <MenuItem
-                onClick={() => setSearchParams({ category: "pet care" })}
+                onClick={() =>
+                  navigate({
+                    pathname: "/products",
+                    search: `?${createSearchParams({ category: "pet care" })}`,
+                  })
+                }
                 icon={
                   <Image
                     className=' h-8 w-8'
@@ -199,7 +236,12 @@ const Header = () => {
               </MenuItem>
               <MenuItem
                 onClick={() =>
-                  setSearchParams({ category: "Mobile and tablets" })
+                  navigate({
+                    pathname: "/products",
+                    search: `?${createSearchParams({
+                      category: "mobile and tablets",
+                    })}`,
+                  })
                 }
                 icon={
                   <Image
@@ -211,7 +253,12 @@ const Header = () => {
               </MenuItem>
               <MenuItem
                 onClick={() =>
-                  setSearchParams({ category: "Music and Gaming" })
+                  navigate({
+                    pathname: "/products",
+                    search: `?${createSearchParams({
+                      category: "music and gaming",
+                    })}`,
+                  })
                 }
                 icon={
                   <Image
