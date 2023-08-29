@@ -10,6 +10,7 @@ import {
   ActivationPage,
   Faq,
   Products,
+  Events,
 } from "./utils/routes";
 import { useSelector, useDispatch } from "react-redux";
 import {
@@ -47,6 +48,7 @@ const App = () => {
         <Route path='/signup' element={<Register />} />
         <Route path='/forgot-password' element={<Forgot />} />
         <Route path='/products' element={<Products />} />
+        <Route path='/events' element={<Events />} />
         <Route
           path='/activate/:activation_token'
           element={<ActivationPage />}

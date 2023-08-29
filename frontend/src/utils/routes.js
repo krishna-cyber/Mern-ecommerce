@@ -7,5 +7,6 @@ import Forgot from "../pages/Forgot";
 import ActivationPage from "../pages/ActivationPage";
 import Faq from "../pages/Faq";
 import Products from "../pages/Products";
+import Events from "../pages/Events";
 
-export { Login, Register, Home, Forgot, ActivationPage, Faq, Products };
+export { Login, Register, Home, Forgot, ActivationPage, Faq, Products, Events };
