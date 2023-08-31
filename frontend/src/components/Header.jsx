@@ -13,22 +13,14 @@ import { FaRegUserCircle } from "react-icons/fa";
 import { Image } from "@chakra-ui/react";
 import { productData } from "../static/data";
 import { Badge } from "@chakra-ui/react";
+import { useSelector, useDispatch } from "react-redux";
 import { createSearchParams, useNavigate } from "react-router-dom";
-import {
-  Button,
-  Menu,
-  MenuButton,
-  MenuList,
-  MenuItem,
-  MenuItemOption,
-  MenuGroup,
-  MenuOptionGroup,
-  MenuDivider,
-  Img,
-} from "@chakra-ui/react";
+import { Button, Menu, MenuButton, MenuList, MenuItem } from "@chakra-ui/react";
 import { Table, Tr, TableContainer } from "@chakra-ui/react";
 
 const Header = () => {
+  const dispatch = useDispatch();
+  const isAuthenticated = useSelector((state) => state.user.isAuthenticated);
   const navigate = useNavigate();
   const [searchTerm, setSearchTerm] = useState("");
   const [searchData, setSearchData] = useState([]);
@@ -206,9 +198,24 @@ const Header = () => {
                 </Link>
               </li>
               <li>
-                <Link to='/login'>
+                {isAuthenticated && isAuthenticated === true ? (
                   <FaRegUserCircle className='inline-block text-2xl' />
-                </Link>
+                ) : (
+                  <>
+                    <Link to='/login'>
+                      <Button size={"sm"}>Login</Button>
+                    </Link>
+                    <Link to='/signup'>
+                      <Button size={"sm"} marginLeft={"2"}>
+                        Register
+                      </Button>
+                    </Link>
+                  </>
+                )}
+
+                {/* <Link to='/login'>
+                  <FaRegUserCircle className='inline-block text-2xl' />
+                </Link> */}
               </li>
             </ul>
           </div>
