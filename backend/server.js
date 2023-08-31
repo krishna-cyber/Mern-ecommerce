@@ -1,7 +1,8 @@
+/** @format */
+
 //installed or library modules
 const express = require("express");
 const cookieParser = require("cookie-parser");
-const mongoose = require("mongoose");
 require("dotenv").config({ path: "./config/.env" });
 const cors = require("cors");
 const morgan = require("morgan");
@@ -54,3 +55,5 @@ const server = app.listen(3000, () => {
   console.log(`Server is running on port ${process.env.PORT}`);
   console.log(`http://localhost:${process.env.PORT}`);
 });
+
+//configuring cloudinary

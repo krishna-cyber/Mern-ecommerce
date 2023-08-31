@@ -52,8 +52,14 @@ const userSchmea = new Schema(
       default: "user",
     },
     avatar: {
-      type: String,
-      required: true,
+      path: {
+        type: String,
+        required: true,
+      },
+      cloudinary_id: {
+        type: String,
+        required: true,
+      },
     },
     status: {
       type: String,

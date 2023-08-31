@@ -1,10 +1,13 @@
+/** @format */
+
 const expressAsyncHandler = require("express-async-handler");
 const jwt = require("jsonwebtoken"); //jwt token for user authentication
 const fs = require("fs"); //file system for file handling
 
 const User = require("../models/User"); // user model that contains user schema
 const sendEmail = require("../utils/nodeMailer"); //node mailer for sending email to user
-
+const upload = require("../utils/multer");
+const cloudinary = require("../utils/cloudinary");
 //generate jwt token
 const generateToken = (id) => {
   return jwt.sign({ id }, process.env.JWT_SECRET, {
@@ -52,7 +55,7 @@ const registerUser = expressAsyncHandler(async (req, res) => {
   const { name, email, password } = req.body;
 
   //check if user already exist or not
-  User.findOne({ email }).then((user) => {
+  User.findOne({ email }).then(async (user) => {
     if (user) {
       //if user exist delete saved avatar
       if (req.file) {
@@ -69,13 +72,12 @@ const registerUser = expressAsyncHandler(async (req, res) => {
 
       return res.status(400).json({ message: "Email already exists" });
     }
-
+    const result = await cloudinary.uploader.upload(req.file.path);
     //get file path from multer
-    console.log(req.file);
     const file = req.file;
-    let avatar = "";
+    let avatar = {};
     if (file) {
-      avatar = file.path;
+      avatar = { path: result.secure_url, cloudinary_id: result.public_id };
     } else {
       avatar = "uploads/default.jpg";
     }

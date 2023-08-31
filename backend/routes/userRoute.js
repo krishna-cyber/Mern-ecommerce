@@ -1,7 +1,8 @@
-const express = require("express");
-const upload = require("../utils/multer"); // for file upload and storage
-const router = express.Router();
+/** @format */
 
+const express = require("express");
+// const upload = require("../utils/multer"); // for file upload and storage
+const router = express.Router();
 const authMiddleware = require("../middlewares/authMiddleware");
 
 const {
@@ -19,6 +20,8 @@ const {
   updateUser,
   deleteUser,
 } = require("../controllers/userController");
+const multer = require("multer");
+const upload = multer({ dest: "../uploads" });
 
 // const { isAuthenticatedUser, authorizeRoles } = require("../middlewares/auth");
 
