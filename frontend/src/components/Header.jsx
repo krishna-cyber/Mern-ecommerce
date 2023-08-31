@@ -212,10 +212,6 @@ const Header = () => {
                     </Link>
                   </>
                 )}
-
-                {/* <Link to='/login'>
-                  <FaRegUserCircle className='inline-block text-2xl' />
-                </Link> */}
               </li>
             </ul>
           </div>
