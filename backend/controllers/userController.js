@@ -2,11 +2,9 @@
 
 const expressAsyncHandler = require("express-async-handler");
 const jwt = require("jsonwebtoken"); //jwt token for user authentication
-const fs = require("fs"); //file system for file handling
 
 const User = require("../models/User"); // user model that contains user schema
 const sendEmail = require("../utils/nodeMailer"); //node mailer for sending email to user
-const upload = require("../utils/multer");
 const cloudinary = require("../utils/cloudinary");
 //generate jwt token
 const generateToken = (id) => {
@@ -57,19 +55,6 @@ const registerUser = expressAsyncHandler(async (req, res) => {
   //check if user already exist or not
   User.findOne({ email }).then(async (user) => {
     if (user) {
-      //if user exist delete saved avatar
-      if (req.file) {
-        fs.unlink(req.file.path, (err) => {
-          console.log(`file deleted ${req.file.path}`);
-          if (err) {
-            throw {
-              status: 500,
-              message: err,
-            };
-          }
-        });
-      }
-
       return res.status(400).json({ message: "Email already exists" });
     }
     const result = await cloudinary.uploader.upload(req.file.path);

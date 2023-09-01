@@ -5,7 +5,7 @@ const Schema = mongoose.Schema;
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 
-const userSchmea = new Schema(
+const userSchema = new Schema(
   {
     name: {
       type: String,
@@ -75,30 +75,38 @@ const userSchmea = new Schema(
 );
 
 //hashing password
-userSchmea.pre("save", async function (next) {
-  if (!this.isModified("password")) {
-    next();
-  }
-  const salt = await bcrypt.genSalt(10);
-  this.password = bcrypt.hash(this.password, salt);
 
-  next();
+userSchema.pre("save", function (next) {
+  var user = this;
+  // Only hash the password if it has been modified (or is new)
+  if (!user.isModified("password")) return next();
+  // Generate a salt
+  bcrypt.genSalt(10, function (err, salt) {
+    if (err) return next(err);
+    // Hash the password using the salt
+    bcrypt.hash(user.password, salt, function (err, hash) {
+      if (err) return next(err);
+      // Override the plain text password with the hashed one
+      user.password = hash;
+      next();
+    });
+  });
 });
 
 //compare password
-userSchmea.methods.matchPassword = async function (password) {
+userSchema.methods.matchPassword = async function (password) {
   const match = await bcrypt.compare(password, this.password);
   return match;
 };
 
 //generating token for user
-userSchmea.methods.getJwtToken = function () {
+userSchema.methods.getJwtToken = function () {
   return jwt.sign({ id: this._id }, process.env.JWT_SECRET, {
     expiresIn: process.env.JWT_EXPIRES_TIME,
   });
 };
 
 //creating model for userSchema
-const User = mongoose.model("User", userSchmea);
+const User = mongoose.model("User", userSchema);
 
 module.exports = User;
