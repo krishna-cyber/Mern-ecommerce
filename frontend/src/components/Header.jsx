@@ -10,7 +10,7 @@ import { BiMenuAltLeft } from "react-icons/bi";
 import { BiChevronDown, BiCartAlt } from "react-icons/bi";
 import { AiOutlineHeart } from "react-icons/ai";
 import { FaRegUserCircle } from "react-icons/fa";
-import { Image } from "@chakra-ui/react";
+import { Avatar, Image } from "@chakra-ui/react";
 import { productData } from "../static/data";
 import { Badge } from "@chakra-ui/react";
 import { useSelector, useDispatch } from "react-redux";
@@ -20,6 +20,7 @@ import { Table, Tr, TableContainer } from "@chakra-ui/react";
 
 const Header = () => {
   const dispatch = useDispatch();
+  const user = useSelector((state) => state.user.user);
   const isAuthenticated = useSelector((state) => state.user.isAuthenticated);
   const navigate = useNavigate();
   const [searchTerm, setSearchTerm] = useState("");
@@ -199,7 +200,11 @@ const Header = () => {
               </li>
               <li>
                 {isAuthenticated && isAuthenticated === true ? (
-                  <FaRegUserCircle className='inline-block text-2xl' />
+                  <Avatar
+                    size={"sm"}
+                    name={`${user.name}`}
+                    src={`${user.avatar.path}`}
+                  />
                 ) : (
                   <>
                     <Link to='/login'>
