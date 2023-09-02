@@ -6,12 +6,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { CiWarning } from "react-icons/ci";
 import { loginServer } from "../utils/server";
 import { toast } from "react-toastify";
-import {
-  loginFail,
-  loginRequest,
-  loginSuccess,
-  clearError,
-} from "../reducers/userSlice";
+import { loginFail, loginRequest, loginSuccess } from "../reducers/userSlice";
 import { useDispatch } from "react-redux";
 
 const Login = () => {

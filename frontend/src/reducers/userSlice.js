@@ -1,4 +1,7 @@
+/** @format */
+
 import { createSlice } from "@reduxjs/toolkit";
+import axios from "axios";
 
 const initialState = {
   isAuthenticated: false,
@@ -27,9 +30,15 @@ const userSlice = createSlice({
     clearError: (state, action) => {
       state.error = null;
     },
+    logoutUser: (state, action) => {
+      state.isAuthenticated = false;
+      state.user = null;
+      state.loading = false;
+      state.error = null;
+    },
   },
 });
 
-export const { loginRequest, loginFail, loginSuccess, clearError } =
+export const { loginRequest, loginFail, loginSuccess, clearError, logoutUser } =
   userSlice.actions;
 export default userSlice.reducer;

@@ -12,11 +12,12 @@ import { AiOutlineHeart, AiOutlineUser } from "react-icons/ai";
 import { RxDashboard } from "react-icons/rx";
 import { BiLogOut } from "react-icons/bi";
 import { Avatar, Image } from "@chakra-ui/react";
-
+import { logoutServer } from "../utils/server";
 import { productData } from "../static/data";
 import { Badge } from "@chakra-ui/react";
 import { useSelector, useDispatch } from "react-redux";
 import { createSearchParams, useNavigate } from "react-router-dom";
+import { logoutUser } from "../reducers/userSlice";
 import {
   Table,
   Tr,
@@ -31,6 +32,7 @@ import {
   MenuOptionGroup,
   MenuDivider,
 } from "@chakra-ui/react";
+import { toast } from "react-toastify";
 
 const Header = () => {
   const dispatch = useDispatch();
@@ -55,6 +57,21 @@ const Header = () => {
     console.log(results);
     setSearchData(results);
   };
+
+  //logout handler
+  const handleLogout = () => {
+    logoutServer
+      .get("/")
+      .then((res) => {
+        dispatch(logoutUser());
+        navigate("/");
+        toast.success(res.data.message);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
   return (
     <>
       <div className={`${styles.section}`}>
@@ -237,7 +254,10 @@ const Header = () => {
                       <MenuItem icon={<RxDashboard />} color={"black"}>
                         Dashboard
                       </MenuItem>
-                      <MenuItem icon={<BiLogOut />} color={"black"}>
+                      <MenuItem
+                        icon={<BiLogOut />}
+                        color={"black"}
+                        onClick={handleLogout}>
                         Logout
                       </MenuItem>
                     </MenuList>

@@ -1,3 +1,5 @@
+/** @format */
+
 import axios from "axios";
 
 const server = axios.create({
@@ -19,4 +21,9 @@ const loginServer = axios.create({
   baseURL: "http://localhost:3000/api/users/login",
   withCredentials: true,
 });
-export { server, activationServer, fetchServer, loginServer };
+
+const logoutServer = axios.create({
+  baseURL: "http://localhost:3000/api/users/logout",
+  withCredentials: true,
+});
+export { server, activationServer, fetchServer, loginServer, logoutServer };
