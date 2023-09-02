@@ -36,4 +36,7 @@ router.post("/activation", tokenVerification);
 //login user
 router.post("/login", loginUser);
 
+//logout user
+router.get("/logout", authMiddleware, logoutUser);
+
 module.exports = router;

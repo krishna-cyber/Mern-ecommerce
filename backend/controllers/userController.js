@@ -173,6 +173,12 @@ const loginUser = expressAsyncHandler(async (req, res) => {
   });
 });
 
+//logout user controller
+
+const logoutUser = expressAsyncHandler(async (req, res) => {
+  res.clearCookie("token");
+  res.status(200).json({ message: "User logged out successfully" });
+});
 //token verification controller
 const tokenVerification = expressAsyncHandler(async (req, res) => {
   const { token } = req.body;
@@ -218,4 +224,10 @@ const tokenVerification = expressAsyncHandler(async (req, res) => {
     });
 });
 
-module.exports = { getUserProfile, registerUser, tokenVerification, loginUser };
+module.exports = {
+  getUserProfile,
+  registerUser,
+  tokenVerification,
+  loginUser,
+  logoutUser,
+};
