@@ -8,15 +8,29 @@ import { BsSearch } from "react-icons/bs";
 import { BiChevronRight } from "react-icons/bi";
 import { BiMenuAltLeft } from "react-icons/bi";
 import { BiChevronDown, BiCartAlt } from "react-icons/bi";
-import { AiOutlineHeart } from "react-icons/ai";
-import { FaRegUserCircle } from "react-icons/fa";
+import { AiOutlineHeart, AiOutlineUser } from "react-icons/ai";
+import { RxDashboard } from "react-icons/rx";
+import { BiLogOut } from "react-icons/bi";
 import { Avatar, Image } from "@chakra-ui/react";
+
 import { productData } from "../static/data";
 import { Badge } from "@chakra-ui/react";
 import { useSelector, useDispatch } from "react-redux";
 import { createSearchParams, useNavigate } from "react-router-dom";
-import { Button, Menu, MenuButton, MenuList, MenuItem } from "@chakra-ui/react";
-import { Table, Tr, TableContainer } from "@chakra-ui/react";
+import {
+  Table,
+  Tr,
+  TableContainer,
+  Menu,
+  Button,
+  MenuButton,
+  MenuList,
+  MenuItem,
+  MenuItemOption,
+  MenuGroup,
+  MenuOptionGroup,
+  MenuDivider,
+} from "@chakra-ui/react";
 
 const Header = () => {
   const dispatch = useDispatch();
@@ -200,11 +214,34 @@ const Header = () => {
               </li>
               <li>
                 {isAuthenticated && isAuthenticated === true ? (
-                  <Avatar
-                    size={"sm"}
-                    name={`${user.name}`}
-                    src={`${user.avatar.path}`}
-                  />
+                  <Menu>
+                    <MenuButton>
+                      {" "}
+                      <Avatar
+                        size={"sm"}
+                        name={`${user.name}`}
+                        src={`${user.avatar.path}`}
+                      />
+                    </MenuButton>
+                    <MenuList>
+                      <MenuItem icon={<AiOutlineHeart />} color={"black"}>
+                        WishList
+                      </MenuItem>
+                      <MenuItem icon={<BiCartAlt />} color={"black"}>
+                        Cart
+                      </MenuItem>
+
+                      <MenuItem icon={<AiOutlineUser />} color={"black"}>
+                        Profile
+                      </MenuItem>
+                      <MenuItem icon={<RxDashboard />} color={"black"}>
+                        Dashboard
+                      </MenuItem>
+                      <MenuItem icon={<BiLogOut />} color={"black"}>
+                        Logout
+                      </MenuItem>
+                    </MenuList>
+                  </Menu>
                 ) : (
                   <>
                     <Link to='/login'>
