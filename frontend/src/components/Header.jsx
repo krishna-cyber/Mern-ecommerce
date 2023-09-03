@@ -27,15 +27,20 @@ import {
   MenuButton,
   MenuList,
   MenuItem,
-  MenuItemOption,
-  MenuGroup,
-  MenuOptionGroup,
-  MenuDivider,
+  Drawer,
+  DrawerOverlay,
+  DrawerBody,
+  DrawerCloseButton,
+  useDisclosure,
+  DrawerContent,
+  DrawerFooter,
+  DrawerHeader,
 } from "@chakra-ui/react";
 import { toast } from "react-toastify";
 
 const Header = () => {
   const dispatch = useDispatch();
+  const { isOpen, onOpen, onClose } = useDisclosure();
   const user = useSelector((state) => state.user.user);
   const isAuthenticated = useSelector((state) => state.user.isAuthenticated);
   const navigate = useNavigate();
@@ -72,6 +77,8 @@ const Header = () => {
       });
   };
 
+  //button reference for cart button click
+  const cartBtnRef = React.useRef();
   return (
     <>
       <div className={`${styles.section}`}>
@@ -212,22 +219,22 @@ const Header = () => {
             </ul>
           </div>
           <div className='cartoptions'>
-            <ul className=' flex gap-6 font-semibold text-white'>
+            <ul className=' flex gap-6 items-center font-semibold text-white'>
               <li>
-                <Link to='/wishlist'>
-                  <AiOutlineHeart className='inline-block text-2xl' />
-                  <Badge colorScheme='green' variant='solid' className='ml-1'>
-                    0
-                  </Badge>
-                </Link>
-              </li>
-              <li>
-                <Link to='/cart'>
+                <Button variant={"unstyled"} ref={cartBtnRef} onClick={onOpen}>
                   <BiCartAlt className='inline-block text-2xl' />
                   <Badge colorScheme='green' variant='solid' className='ml-1'>
                     0
                   </Badge>
-                </Link>
+                </Button>
+              </li>
+              <li>
+                <Button variant={"unstyled"} ref={cartBtnRef} onClick={onOpen}>
+                  <BiCartAlt className='inline-block text-2xl' />
+                  <Badge colorScheme='green' variant='solid' className='ml-1'>
+                    0
+                  </Badge>
+                </Button>
               </li>
               <li>
                 {isAuthenticated && isAuthenticated === true ? (
@@ -241,12 +248,22 @@ const Header = () => {
                       />
                     </MenuButton>
                     <MenuList>
-                      <MenuItem icon={<AiOutlineHeart />} color={"black"}>
-                        WishList
-                      </MenuItem>
-                      <MenuItem icon={<BiCartAlt />} color={"black"}>
-                        Cart
-                      </MenuItem>
+                      <Button
+                        variant={"unstyled"}
+                        width={"full"}
+                        onClick={onOpen}>
+                        <MenuItem icon={<AiOutlineHeart />} color={"black"}>
+                          WishList
+                        </MenuItem>
+                      </Button>
+                      <Button
+                        variant={"unstyled"}
+                        width={"full"}
+                        onClick={onOpen}>
+                        <MenuItem icon={<BiCartAlt />} color={"black"}>
+                          Cart
+                        </MenuItem>
+                      </Button>
 
                       <MenuItem icon={<AiOutlineUser />} color={"black"}>
                         Profile
@@ -279,6 +296,28 @@ const Header = () => {
           </div>
         </div>
       </nav>
+
+      {/* Drawer component defined here */}
+      <Drawer
+        isOpen={isOpen}
+        placement='right'
+        onClose={onClose}
+        finalFocusRef={cartBtnRef}>
+        <DrawerOverlay />
+        <DrawerContent>
+          <DrawerCloseButton />
+          <DrawerHeader>Create your account</DrawerHeader>
+
+          <DrawerBody></DrawerBody>
+
+          <DrawerFooter>
+            <Button variant='outline' mr={3} onClick={onClose}>
+              Cancel
+            </Button>
+            <Button colorScheme='blue'>Save</Button>
+          </DrawerFooter>
+        </DrawerContent>
+      </Drawer>
     </>
   );
 };
