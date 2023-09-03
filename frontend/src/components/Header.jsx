@@ -222,7 +222,7 @@ const Header = () => {
             <ul className=' flex gap-6 items-center font-semibold text-white'>
               <li>
                 <Button variant={"unstyled"} ref={cartBtnRef} onClick={onOpen}>
-                  <BiCartAlt className='inline-block text-2xl' />
+                  <AiOutlineHeart className='inline-block text-2xl' />
                   <Badge colorScheme='green' variant='solid' className='ml-1'>
                     0
                   </Badge>

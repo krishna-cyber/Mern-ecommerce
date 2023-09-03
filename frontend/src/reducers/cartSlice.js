@@ -23,15 +23,29 @@ export const cartSlice = createSlice({
         state.total += item.price;
       }
     },
-    remove: (state) => {
-      // Set the user to null
-      state.user = null;
+    removeFromCart: (state, action) => {
+      const id = action.payload; //no need to send the whole item .... id of an product is sufficent for remvoing from the cart
+
+      //checking the item is already in the cart
+      const index = state.items.findIndex((i) => i.id === id);
+      if (index !== -1) {
+        state.items[index].quantity--;
+        state.total -= state.items[index].price;
+      }
+      //check if the item's quantity is zero
+      if (state.items[index].quantity == 0) {
+        state.items.splice(index, 1);
+      }
+    },
+    resetCart: (state, action) => {
+      state.items = [];
+      state.total = 0;
     },
   },
 });
 
 // Export the actions for dispatching
-export const { add, remove } = userSlice.actions;
+export const { addToCart, removeFromCart, resetCart } = cartSlice.actions;
 
 // Export a selector to get the user from the state
 
