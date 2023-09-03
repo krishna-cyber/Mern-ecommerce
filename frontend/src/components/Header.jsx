@@ -37,11 +37,13 @@ import {
   DrawerHeader,
 } from "@chakra-ui/react";
 import { toast } from "react-toastify";
+import { selectCartItems } from "../reducers/cartSlice";
 
 const Header = () => {
   const dispatch = useDispatch();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const user = useSelector((state) => state.user.user);
+  const cartItems = useSelector((state) => state.cart.items);
   const isAuthenticated = useSelector((state) => state.user.isAuthenticated);
   const navigate = useNavigate();
   const [searchTerm, setSearchTerm] = useState("");
@@ -232,7 +234,7 @@ const Header = () => {
                 <Button variant={"unstyled"} ref={cartBtnRef} onClick={onOpen}>
                   <BiCartAlt className='inline-block text-2xl' />
                   <Badge colorScheme='green' variant='solid' className='ml-1'>
-                    0
+                    {cartItems.length}
                   </Badge>
                 </Button>
               </li>

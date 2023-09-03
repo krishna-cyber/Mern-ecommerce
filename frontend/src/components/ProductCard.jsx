@@ -226,8 +226,8 @@ const ProductCard = ({ item }) => {
                 mr={3}
                 onClick={async () => {
                   setModalProduct({ ...modalProduct, quantity: qty });
-                  console.log(modalProduct);
                   dispatch(addToCart(modalProduct));
+                  onClose();
                 }}>
                 Add To Cart
                 <AiOutlineShoppingCart className='text-2xl' />
