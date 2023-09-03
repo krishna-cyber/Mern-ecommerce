@@ -306,15 +306,15 @@ const Header = () => {
         <DrawerOverlay />
         <DrawerContent>
           <DrawerCloseButton />
-          <DrawerHeader>Create your account</DrawerHeader>
+          <DrawerHeader>Cart Items:</DrawerHeader>
 
           <DrawerBody></DrawerBody>
 
           <DrawerFooter>
-            <Button variant='outline' mr={3} onClick={onClose}>
-              Cancel
+            <Button width={"full"} colorScheme={"red"}>
+              <span>Checkout</span>
+              <span>{2}</span>
             </Button>
-            <Button colorScheme='blue'>Save</Button>
           </DrawerFooter>
         </DrawerContent>
       </Drawer>

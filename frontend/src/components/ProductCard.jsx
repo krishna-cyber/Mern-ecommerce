@@ -16,15 +16,23 @@ import {
   ModalFooter,
   ModalBody,
   Button,
+  Input,
+  InputGroup,
+  InputLeftElement,
+  InputRightElement,
+  FormControl,
   ModalCloseButton,
   Flex,
   Tooltip,
   Spacer,
   Container,
   useDisclosure,
+  ButtonGroup,
+  Box,
 } from "@chakra-ui/react";
 
 const ProductCard = ({ item }) => {
+  const [quantity, setQuantity] = useState(1);
   const [modalProduct, setModalProduct] = useState(null);
   const { isOpen, onOpen, onClose } = useDisclosure();
   const navigate = useNavigate();
@@ -174,18 +182,33 @@ const ProductCard = ({ item }) => {
                         maxW='sm'
                         centerContent>
                         <Spacer />
-                        <Button
-                          className=' flex gap-3'
-                          variant={"ghost"}
-                          mr={3}>
-                          <span className=' text-2xl'>-</span>
+                        <Box className=' flex gap-1' mr={3}>
+                          <Button
+                            variant={"solid"}
+                            colorScheme={"green"}
+                            onClick={() => {
+                              setQuantity(quantity + 1);
+                            }}>
+                            +
+                          </Button>
                           <input
-                            className=' w-10 text-center'
+                            className=' w-10 text-center opacity-100'
                             type='text'
-                            value='1'
+                            value={quantity}
+                            onChange={(e) => {
+                              setQuantity(e.target.value);
+                            }}
                           />
-                          <span className=' text-2xl'>+</span>
-                        </Button>
+                          <Button
+                            variant={"solid"}
+                            colorScheme={"red"}
+                            isDisabled={quantity <= 1}
+                            onClick={() => {
+                              setQuantity(quantity - 1);
+                            }}>
+                            -
+                          </Button>
+                        </Box>
                       </Container>
                     </span>
                     <span className=' text-green-600 font-semibold'>

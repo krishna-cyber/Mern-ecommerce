@@ -47,7 +47,5 @@ export const cartSlice = createSlice({
 // Export the actions for dispatching
 export const { addToCart, removeFromCart, resetCart } = cartSlice.actions;
 
-// Export a selector to get the user from the state
-
 // Export the reducer as default
 export default cartSlice.reducer;
