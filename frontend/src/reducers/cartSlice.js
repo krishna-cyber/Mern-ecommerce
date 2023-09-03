@@ -15,11 +15,13 @@ export const cartSlice = createSlice({
       const item = action.payload;
       //check if the item is already in the cart
       const index = state.items.findIndex((i) => i.id === item.id);
-      if (index === -1) {
-        state.items[index].quantity++;
+      if (index !== -1) {
+        // If yes, increment the quantity and update the total
+        state.items[index].quantity += item.quantity;
         state.total += item.price;
       } else {
-        state.items.push({ ...item, quantity: 0 });
+        // If not, add the item to the cart with quantity 1 and update the total
+        state.items.push({ ...item, quantity: 1 });
         state.total += item.price;
       }
     },

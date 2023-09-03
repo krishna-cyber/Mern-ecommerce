@@ -6,7 +6,6 @@ import { AiOutlineStar } from "react-icons/ai";
 import { AiOutlineEye } from "react-icons/ai";
 import { AiOutlineHeart } from "react-icons/ai";
 import { useNavigate } from "react-router-dom";
-
 import { AiOutlineShoppingCart } from "react-icons/ai";
 import {
   Modal,
@@ -16,23 +15,22 @@ import {
   ModalFooter,
   ModalBody,
   Button,
-  Input,
-  InputGroup,
-  InputLeftElement,
-  InputRightElement,
-  FormControl,
   ModalCloseButton,
   Flex,
   Tooltip,
   Spacer,
   Container,
   useDisclosure,
-  ButtonGroup,
   Box,
 } from "@chakra-ui/react";
 
+//redux setup
+import { useDispatch } from "react-redux";
+import { addToCart, removeFromCart } from "../reducers/cartSlice";
+
 const ProductCard = ({ item }) => {
-  const [quantity, setQuantity] = useState(1);
+  const dispatch = useDispatch();
+  const [qty, setQuantity] = useState(1);
   const [modalProduct, setModalProduct] = useState(null);
   const { isOpen, onOpen, onClose } = useDisclosure();
   const navigate = useNavigate();
@@ -187,14 +185,14 @@ const ProductCard = ({ item }) => {
                             variant={"solid"}
                             colorScheme={"green"}
                             onClick={() => {
-                              setQuantity(quantity + 1);
+                              setQuantity(qty + 1);
                             }}>
                             +
                           </Button>
                           <input
                             className=' w-10 text-center opacity-100'
                             type='text'
-                            value={quantity}
+                            value={qty}
                             onChange={(e) => {
                               setQuantity(e.target.value);
                             }}
@@ -202,9 +200,9 @@ const ProductCard = ({ item }) => {
                           <Button
                             variant={"solid"}
                             colorScheme={"red"}
-                            isDisabled={quantity <= 1}
+                            isDisabled={qty <= 1}
                             onClick={() => {
-                              setQuantity(quantity - 1);
+                              setQuantity(qty - 1);
                             }}>
                             -
                           </Button>
@@ -226,7 +224,11 @@ const ProductCard = ({ item }) => {
                 color={"white"}
                 background={"black"}
                 mr={3}
-                onClick={onClose}>
+                onClick={async () => {
+                  setModalProduct({ ...modalProduct, quantity: qty });
+                  console.log(modalProduct);
+                  dispatch(addToCart(modalProduct));
+                }}>
                 Add To Cart
                 <AiOutlineShoppingCart className='text-2xl' />
               </Button>
