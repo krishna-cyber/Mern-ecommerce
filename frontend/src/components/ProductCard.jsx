@@ -56,7 +56,7 @@ const ProductCard = ({ item }) => {
 
           <AiOutlineShoppingCart
             onClick={() => {
-              dispatch(addToCart(item));
+              dispatch(addToCart({ ...item, quantity: 1 }));
             }}
             className='text-2xl cursor-pointer'
           />

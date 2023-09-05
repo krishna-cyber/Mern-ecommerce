@@ -9,9 +9,18 @@ import { BiChevronRight } from "react-icons/bi";
 import { BiMenuAltLeft } from "react-icons/bi";
 import { BiChevronDown, BiCartAlt } from "react-icons/bi";
 import { AiOutlineHeart, AiOutlineUser } from "react-icons/ai";
+import { RxCross2 } from "react-icons/rx";
 import { RxDashboard } from "react-icons/rx";
 import { BiLogOut } from "react-icons/bi";
-import { Avatar, Image } from "@chakra-ui/react";
+import {
+  Avatar,
+  Box,
+  Card,
+  CardBody,
+  CardHeader,
+  IconButton,
+  Image,
+} from "@chakra-ui/react";
 import { logoutServer } from "../utils/server";
 import { productData } from "../static/data";
 import { Badge } from "@chakra-ui/react";
@@ -23,10 +32,12 @@ import {
   Tr,
   TableContainer,
   Menu,
+  Text,
   Button,
   MenuButton,
   MenuList,
   MenuItem,
+  Divider,
   Drawer,
   DrawerOverlay,
   DrawerBody,
@@ -37,13 +48,13 @@ import {
   DrawerHeader,
 } from "@chakra-ui/react";
 import { toast } from "react-toastify";
-import { selectCartItems } from "../reducers/cartSlice";
 
 const Header = () => {
   const dispatch = useDispatch();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const user = useSelector((state) => state.user.user);
   const cartItems = useSelector((state) => state.cart.items);
+  const total = useSelector((state) => state.cart.total);
   const isAuthenticated = useSelector((state) => state.user.isAuthenticated);
   const navigate = useNavigate();
   const [searchTerm, setSearchTerm] = useState("");
@@ -226,7 +237,7 @@ const Header = () => {
                 <Button variant={"unstyled"} ref={cartBtnRef} onClick={onOpen}>
                   <AiOutlineHeart className='inline-block text-2xl' />
                   <Badge colorScheme='green' variant='solid' className='ml-1'>
-                    0
+                    {0}
                   </Badge>
                 </Button>
               </li>
@@ -301,6 +312,7 @@ const Header = () => {
 
       {/* Drawer component defined here */}
       <Drawer
+        size={"sm"}
         isOpen={isOpen}
         placement='right'
         onClose={onClose}
@@ -310,12 +322,55 @@ const Header = () => {
           <DrawerCloseButton />
           <DrawerHeader>Cart Items:</DrawerHeader>
 
-          <DrawerBody></DrawerBody>
+          <DrawerBody>
+            {cartItems &&
+              cartItems.map((item) => {
+                return (
+                  <>
+                    <Card marginBottom={"1.5"}>
+                      <CardBody className=' flex '>
+                        <Box className=' flex'>
+                          {" "}
+                          <Image
+                            height={"16"}
+                            src={`${item.image_Url[0].url}`}
+                            alt={`${item.category}`}
+                          />
+                          <Box className=' flex flex-col gap-3'>
+                            {" "}
+                            <Text fontWeight={"semibold"}>{item.name}</Text>
+                            <Box className=' flex justify-between'>
+                              {" "}
+                              <Text fontWeight={"thin"} color={"red"}>
+                                USD {item.price}
+                                <Text fontWeight={"thin"} color={"black"}>
+                                  Quantity: {item.quantity}
+                                </Text>
+                              </Text>
+                              <Text fontWeight={"bold"} color={"red"}>
+                                Total: {item.price * item.quantity}
+                              </Text>
+                            </Box>
+                          </Box>
+                        </Box>
+                        <IconButton
+                          variant={"ghost"}
+                          colorScheme={"gray"}
+                          icon={<RxCross2 />}
+                        />
+                      </CardBody>
+                    </Card>
+                  </>
+                );
+              })}
+          </DrawerBody>
 
           <DrawerFooter>
             <Button width={"full"} colorScheme={"red"}>
-              <span>Checkout</span>
-              <span>{2}</span>
+              <span className='flex gap-4'>
+                Checkout <span className=' font-bold'>$ {total}</span>
+              </span>
+              <span></span>
             </Button>
           </DrawerFooter>
         </DrawerContent>
