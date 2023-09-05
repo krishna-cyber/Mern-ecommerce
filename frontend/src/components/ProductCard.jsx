@@ -53,7 +53,13 @@ const ProductCard = ({ item }) => {
             }}
             className='text-2xl cursor-pointer'
           />
-          <AiOutlineShoppingCart className='text-2xl cursor-pointer' />
+
+          <AiOutlineShoppingCart
+            onClick={() => {
+              dispatch(addToCart(item));
+            }}
+            className='text-2xl cursor-pointer'
+          />
         </div>
       </span>
 
