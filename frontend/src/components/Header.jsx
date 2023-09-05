@@ -48,6 +48,7 @@ import {
   DrawerHeader,
 } from "@chakra-ui/react";
 import { toast } from "react-toastify";
+import { deleteFromCart } from "../reducers/cartSlice";
 
 const Header = () => {
   const dispatch = useDispatch();
@@ -356,6 +357,9 @@ const Header = () => {
                         <IconButton
                           variant={"ghost"}
                           colorScheme={"gray"}
+                          onClick={() => {
+                            dispatch(deleteFromCart(item.id));
+                          }}
                           icon={<RxCross2 />}
                         />
                       </CardBody>

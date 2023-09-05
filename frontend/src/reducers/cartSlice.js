@@ -39,6 +39,14 @@ export const cartSlice = createSlice({
         state.items.splice(index, 1);
       }
     },
+    deleteFromCart: (state, action) => {
+      const id = action.payload; //no need to send the whole item.... id of an product is sufficent for remvoing from the cart
+      const index = state.items.findIndex((i) => i.id === id);
+      if (index !== -1) {
+        state.total -= state.items[index].price * state.items[index].quantity;
+        state.items.splice(index, 1);
+      }
+    },
     resetCart: (state, action) => {
       state.items = [];
       state.total = 0;
@@ -47,7 +55,8 @@ export const cartSlice = createSlice({
 });
 
 // Export the actions for dispatching
-export const { addToCart, removeFromCart, resetCart } = cartSlice.actions;
+export const { addToCart, removeFromCart, deleteFromCart, resetCart } =
+  cartSlice.actions;
 
 // export all the cart items
 
