@@ -27,6 +27,7 @@ import {
 //redux setup
 import { useDispatch } from "react-redux";
 import { addToCart, removeFromCart } from "../reducers/cartSlice";
+import { addToWishlist, removeFromWishlist } from "../reducers/wishlistSlice";
 
 const ProductCard = ({ item }) => {
   const dispatch = useDispatch();
@@ -45,7 +46,12 @@ const ProductCard = ({ item }) => {
           alt={item.image_Url[0].url}
         />
         <div className=' ml-auto w-fit flex flex-col gap-3'>
-          <AiOutlineHeart className='text-2xl cursor-pointer' />
+          <AiOutlineHeart
+            onClick={() => {
+              dispatch(addToWishlist(item));
+            }}
+            className='text-2xl cursor-pointer'
+          />
           <AiOutlineEye
             onClick={() => {
               setModalProduct(item);
