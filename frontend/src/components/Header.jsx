@@ -48,7 +48,12 @@ import {
   DrawerHeader,
 } from "@chakra-ui/react";
 import { toast } from "react-toastify";
-import { deleteFromCart } from "../reducers/cartSlice";
+import {
+  addFromWishlist,
+  addToCart,
+  deleteFromCart,
+} from "../reducers/cartSlice";
+import { resetWishlist } from "../reducers/wishlistSlice";
 
 function Wishlist() {
   const dispatch = useDispatch();
@@ -58,7 +63,7 @@ function Wishlist() {
     <>
       {" "}
       <Button variant={"unstyled"} onClick={onOpen}>
-        <BiCartAlt className='inline-block text-2xl' />
+        <AiOutlineHeart className='inline-block text-2xl' />
         <Badge colorScheme='green' variant='solid' className='ml-1'>
           {wishlistItems.length}
         </Badge>
@@ -108,11 +113,20 @@ function Wishlist() {
           </DrawerBody>
 
           <DrawerFooter>
-            <Button width={"full"} colorScheme={"red"}>
-              <span className='flex gap-4'>
-                Checkout <span className=' font-bold'>$ {0}</span>
-              </span>
-              <span></span>
+            <Button
+              width={"full"}
+              colorScheme={"red"}
+              onClick={() => {
+                let items = wishlistItems.map((item) => {
+                  return { ...item, quantity: 1 };
+                });
+                dispatch(addFromWishlist(items));
+                toast.success("All items have been added to wishlist");
+                dispatch(resetWishlist());
+                onClose();
+              }}
+              isDisabled={wishlistItems.length == 0}>
+              <span className='flex gap-4'>Add all items to cart</span>
             </Button>
           </DrawerFooter>
         </DrawerContent>
@@ -189,7 +203,10 @@ function Cart() {
           </DrawerBody>
 
           <DrawerFooter>
-            <Button width={"full"} colorScheme={"red"}>
+            <Button
+              width={"full"}
+              colorScheme={"red"}
+              isDisabled={cartItems.length == 0}>
               <span className='flex gap-4'>
                 Checkout <span className=' font-bold'>$ {total}</span>
               </span>
