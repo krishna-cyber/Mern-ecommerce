@@ -50,11 +50,164 @@ import {
 import { toast } from "react-toastify";
 import { deleteFromCart } from "../reducers/cartSlice";
 
+function Wishlist() {
+  const dispatch = useDispatch();
+  const { isOpen, onOpen, onClose } = useDisclosure();
+  const wishlistItems = useSelector((state) => state.wishlist.items);
+  return (
+    <>
+      {" "}
+      <Button variant={"unstyled"} onClick={onOpen}>
+        <BiCartAlt className='inline-block text-2xl' />
+        <Badge colorScheme='green' variant='solid' className='ml-1'>
+          {wishlistItems.length}
+        </Badge>
+      </Button>
+      {/* Drawer for wishlist */}
+      <Drawer size={"sm"} isOpen={isOpen} placement='right' onClose={onClose}>
+        <DrawerOverlay />
+        <DrawerContent>
+          <DrawerCloseButton />
+          <DrawerHeader>Wishlist Items:</DrawerHeader>
+
+          <DrawerBody>
+            {wishlistItems &&
+              wishlistItems.map((item) => {
+                return (
+                  <>
+                    <Card marginBottom={"1.5"}>
+                      <CardBody className=' flex '>
+                        <Box className=' flex'>
+                          {" "}
+                          <Image
+                            height={"16"}
+                            src={`${item.image_Url[0].url}`}
+                            alt={`${item.category}`}
+                          />
+                          <Box className=' flex flex-col gap-3'>
+                            {" "}
+                            <Text fontWeight={"semibold"}>{item.name}</Text>
+                            <Box className=' flex justify-between'>
+                              {" "}
+                              <Text fontWeight={"thin"} color={"red"}>
+                                USD {item.price}
+                              </Text>
+                            </Box>
+                          </Box>
+                        </Box>
+                        <IconButton
+                          variant={"ghost"}
+                          colorScheme={"gray"}
+                          icon={<RxCross2 />}
+                        />
+                      </CardBody>
+                    </Card>
+                  </>
+                );
+              })}
+          </DrawerBody>
+
+          <DrawerFooter>
+            <Button width={"full"} colorScheme={"red"}>
+              <span className='flex gap-4'>
+                Checkout <span className=' font-bold'>$ {0}</span>
+              </span>
+              <span></span>
+            </Button>
+          </DrawerFooter>
+        </DrawerContent>
+      </Drawer>
+    </>
+  );
+}
+
+function Cart() {
+  const cartItems = useSelector((state) => state.cart.items);
+  const total = useSelector((state) => state.cart.total);
+  const dispatch = useDispatch();
+  const { isOpen, onOpen, onClose } = useDisclosure();
+  return (
+    <>
+      {" "}
+      <Button variant={"unstyled"} onClick={onOpen}>
+        <BiCartAlt className='inline-block text-2xl' />
+        <Badge colorScheme='green' variant='solid' className='ml-1'>
+          {cartItems.length}
+        </Badge>
+      </Button>
+      {/* Drawer for wishlist */}
+      <Drawer size={"sm"} isOpen={isOpen} placement='right' onClose={onClose}>
+        <DrawerOverlay />
+        <DrawerContent>
+          <DrawerCloseButton />
+          <DrawerHeader>Cart Items:</DrawerHeader>
+
+          <DrawerBody>
+            {cartItems &&
+              cartItems.map((item) => {
+                return (
+                  <>
+                    <Card marginBottom={"1.5"}>
+                      <CardBody className=' flex '>
+                        <Box className=' flex'>
+                          {" "}
+                          <Image
+                            height={"16"}
+                            src={`${item.image_Url[0].url}`}
+                            alt={`${item.category}`}
+                          />
+                          <Box className=' flex flex-col gap-3'>
+                            {" "}
+                            <Text fontWeight={"semibold"}>{item.name}</Text>
+                            <Box className=' flex justify-between'>
+                              {" "}
+                              <Text fontWeight={"thin"} color={"red"}>
+                                USD {item.price}
+                                <Text fontWeight={"thin"} color={"black"}>
+                                  Quantity: {item.quantity}
+                                </Text>
+                              </Text>
+                              <Text fontWeight={"bold"} color={"red"}>
+                                Total: {item.price * item.quantity}
+                              </Text>
+                            </Box>
+                          </Box>
+                        </Box>
+                        <IconButton
+                          variant={"ghost"}
+                          colorScheme={"gray"}
+                          onClick={() => {
+                            dispatch(deleteFromCart(item.id));
+                          }}
+                          icon={<RxCross2 />}
+                        />
+                      </CardBody>
+                    </Card>
+                  </>
+                );
+              })}
+          </DrawerBody>
+
+          <DrawerFooter>
+            <Button width={"full"} colorScheme={"red"}>
+              <span className='flex gap-4'>
+                Checkout <span className=' font-bold'>$ {total}</span>
+              </span>
+              <span></span>
+            </Button>
+          </DrawerFooter>
+        </DrawerContent>
+      </Drawer>
+    </>
+  );
+}
+
 const Header = () => {
   const dispatch = useDispatch();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const user = useSelector((state) => state.user.user);
   const cartItems = useSelector((state) => state.cart.items);
+  const wishlistItems = useSelector((state) => state.wishlist.items);
   const total = useSelector((state) => state.cart.total);
   const isAuthenticated = useSelector((state) => state.user.isAuthenticated);
   const navigate = useNavigate();
@@ -235,20 +388,16 @@ const Header = () => {
           <div className='cartoptions'>
             <ul className=' flex gap-6 items-center font-semibold text-white'>
               <li>
-                <Button variant={"unstyled"} ref={cartBtnRef} onClick={onOpen}>
-                  <AiOutlineHeart className='inline-block text-2xl' />
-                  <Badge colorScheme='green' variant='solid' className='ml-1'>
-                    {0}
-                  </Badge>
-                </Button>
+                <Wishlist />
               </li>
               <li>
-                <Button variant={"unstyled"} ref={cartBtnRef} onClick={onOpen}>
+                {/* <Button variant={"unstyled"} ref={cartBtnRef} onClick={onOpen}>
                   <BiCartAlt className='inline-block text-2xl' />
                   <Badge colorScheme='green' variant='solid' className='ml-1'>
                     {cartItems.length}
                   </Badge>
-                </Button>
+                </Button> */}
+                <Cart />
               </li>
               <li>
                 {isAuthenticated && isAuthenticated === true ? (
@@ -310,75 +459,6 @@ const Header = () => {
           </div>
         </div>
       </nav>
-
-      {/* Drawer component defined here */}
-      <Drawer
-        size={"sm"}
-        isOpen={isOpen}
-        placement='right'
-        onClose={onClose}
-        finalFocusRef={cartBtnRef}>
-        <DrawerOverlay />
-        <DrawerContent>
-          <DrawerCloseButton />
-          <DrawerHeader>Cart Items:</DrawerHeader>
-
-          <DrawerBody>
-            {cartItems &&
-              cartItems.map((item) => {
-                return (
-                  <>
-                    <Card marginBottom={"1.5"}>
-                      <CardBody className=' flex '>
-                        <Box className=' flex'>
-                          {" "}
-                          <Image
-                            height={"16"}
-                            src={`${item.image_Url[0].url}`}
-                            alt={`${item.category}`}
-                          />
-                          <Box className=' flex flex-col gap-3'>
-                            {" "}
-                            <Text fontWeight={"semibold"}>{item.name}</Text>
-                            <Box className=' flex justify-between'>
-                              {" "}
-                              <Text fontWeight={"thin"} color={"red"}>
-                                USD {item.price}
-                                <Text fontWeight={"thin"} color={"black"}>
-                                  Quantity: {item.quantity}
-                                </Text>
-                              </Text>
-                              <Text fontWeight={"bold"} color={"red"}>
-                                Total: {item.price * item.quantity}
-                              </Text>
-                            </Box>
-                          </Box>
-                        </Box>
-                        <IconButton
-                          variant={"ghost"}
-                          colorScheme={"gray"}
-                          onClick={() => {
-                            dispatch(deleteFromCart(item.id));
-                          }}
-                          icon={<RxCross2 />}
-                        />
-                      </CardBody>
-                    </Card>
-                  </>
-                );
-              })}
-          </DrawerBody>
-
-          <DrawerFooter>
-            <Button width={"full"} colorScheme={"red"}>
-              <span className='flex gap-4'>
-                Checkout <span className=' font-bold'>$ {total}</span>
-              </span>
-              <span></span>
-            </Button>
-          </DrawerFooter>
-        </DrawerContent>
-      </Drawer>
     </>
   );
 };
