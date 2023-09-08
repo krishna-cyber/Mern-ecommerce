@@ -21,6 +21,7 @@ import {
 } from "./reducers/userSlice";
 import { fetchServer } from "./utils/server";
 import { toast } from "react-toastify";
+import ProductDetails from "./pages/ProductDetails";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -49,6 +50,7 @@ const App = () => {
         <Route path='/forgot-password' element={<Forgot />} />
         <Route path='/products' element={<Products />} />
         <Route path='/events' element={<Events />} />
+        <Route path='/product/:name' element={<ProductDetails />} />
         <Route
           path='/activate/:activation_token'
           element={<ActivationPage />}
