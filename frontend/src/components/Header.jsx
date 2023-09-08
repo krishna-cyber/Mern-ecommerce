@@ -262,7 +262,6 @@ const Header = () => {
   };
 
   //button reference for cart button click
-  const cartBtnRef = React.useRef();
   return (
     <>
       <div className={`${styles.section}`}>
@@ -428,23 +427,6 @@ const Header = () => {
                       />
                     </MenuButton>
                     <MenuList>
-                      <Button
-                        variant={"unstyled"}
-                        width={"full"}
-                        onClick={onOpen}>
-                        <MenuItem icon={<AiOutlineHeart />} color={"black"}>
-                          WishList
-                        </MenuItem>
-                      </Button>
-                      <Button
-                        variant={"unstyled"}
-                        width={"full"}
-                        onClick={onOpen}>
-                        <MenuItem icon={<BiCartAlt />} color={"black"}>
-                          Cart
-                        </MenuItem>
-                      </Button>
-
                       <MenuItem icon={<AiOutlineUser />} color={"black"}>
                         Profile
                       </MenuItem>
