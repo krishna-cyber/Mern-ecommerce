@@ -6,6 +6,7 @@ import {
   HStack,
   Heading,
   Text,
+  Button,
   Image,
   Flex,
 } from "@chakra-ui/react";
@@ -14,10 +15,12 @@ import Header from "../components/Header";
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { productData } from "../static/data";
+import { AiOutlineShoppingCart } from "react-icons/ai";
 
 const ProductDetails = () => {
   const { name } = useParams();
   const [product, setProduct] = useState(null);
+  const [qty, setQuantity] = useState(1);
 
   const productName = name.replace(/-/g, " ");
 
@@ -49,6 +52,47 @@ const ProductDetails = () => {
               <Text fontSize={"lg"} fontWeight={"semibold"} color={"green"}>
                 ${product.price}
               </Text>
+              <Box className=' flex gap-8 flex-col  w-full mt-5' mr={3}>
+                <div>
+                  {" "}
+                  <Button
+                    variant={"solid"}
+                    colorScheme={"green"}
+                    onClick={() => {
+                      setQuantity(qty + 1);
+                    }}>
+                    +
+                  </Button>
+                  <input
+                    className=' w-10 text-center opacity-100'
+                    type='text'
+                    value={qty}
+                    onChange={(e) => {
+                      setQuantity(e.target.value);
+                    }}
+                  />
+                  <Button
+                    variant={"solid"}
+                    colorScheme={"red"}
+                    isDisabled={qty <= 1}
+                    onClick={() => {
+                      setQuantity(qty - 1);
+                    }}>
+                    -
+                  </Button>
+                </div>
+
+                <Box>
+                  <Button
+                    leftIcon={<AiOutlineShoppingCart />}
+                    colorScheme={"green"}
+                    background={"black"}
+                    color={"white"}
+                    size={"lg"}>
+                    Add to cart
+                  </Button>
+                </Box>
+              </Box>
             </Box>
           </Flex>
         </Container>
