@@ -51,48 +51,52 @@ const ProductDetails = () => {
               <Text>{product.description}</Text>
               <Text fontSize={"lg"} fontWeight={"semibold"} color={"green"}>
                 ${product.price}
-              </Text>
-              <Box className=' flex gap-8 flex-col  w-full mt-5' mr={3}>
-                <div>
-                  {" "}
-                  <Button
-                    variant={"solid"}
-                    colorScheme={"green"}
-                    onClick={() => {
-                      setQuantity(qty + 1);
-                    }}>
-                    +
-                  </Button>
-                  <input
-                    className=' w-10 text-center opacity-100'
-                    type='text'
-                    value={qty}
-                    onChange={(e) => {
-                      setQuantity(e.target.value);
-                    }}
-                  />
-                  <Button
-                    variant={"solid"}
-                    colorScheme={"red"}
-                    isDisabled={qty <= 1}
-                    onClick={() => {
-                      setQuantity(qty - 1);
-                    }}>
-                    -
-                  </Button>
-                </div>
-
-                <Box>
-                  <Button
-                    leftIcon={<AiOutlineShoppingCart />}
-                    colorScheme={"green"}
-                    background={"black"}
-                    color={"white"}
-                    size={"lg"}>
-                    Add to cart
-                  </Button>
-                </Box>
-              </Box>
+              </Text>{" "}
+              <Button
+                variant={"solid"}
+                colorScheme={"green"}
+                onClick={() => {
+                  setQuantity(qty + 1);
+                }}>
+                +
+              </Button>
+              <input
+                className=' w-10 text-center opacity-100'
+                type='text'
+                value={qty}
+                onChange={(e) => {
+                  setQuantity(e.target.value);
+                }}
+              />
+              <Button
+                variant={"solid"}
+                colorScheme={"red"}
+                isDisabled={qty <= 1}
+                onClick={() => {
+                  setQuantity(qty - 1);
+                }}>
+                -
+              </Button>
+              <HStack marginTop={"10"} justify={"space-between"}>
+                <Button variant={"solid"} colorScheme={"green"} size={"lg"}>
+                  Buy Now
+                </Button>
+                <Button
+                  variant={"solid"}
+                  backgroundColor={"purple"}
+                  colorScheme={"teal"}
+                  size={"lg"}>
+                  Send Message to seller
+                </Button>
+                <Button
+                  variant={"solid"}
+                  colorScheme={"blue"}
+                  size={"lg"}
+                  leftIcon={<AiOutlineShoppingCart />}
+                  backgroundColor={"black"}>
+                  Add to Cart
+                </Button>
+              </HStack>
             </Box>
           </Flex>
         </Container>

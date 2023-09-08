@@ -13,9 +13,10 @@ export default {
     },
     extend: {
       backgroundImage: {
-        'hero': "URL('https://themes.rslahmed.dev/rafcart/assets/images/banner-2.jpg')"
+        hero: "URL('https://themes.rslahmed.dev/rafcart/assets/images/banner-2.jpg')",
       },
     },
   },
   plugins: [],
+  preflight: false,
 };
