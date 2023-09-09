@@ -9,6 +9,15 @@ import {
   Button,
   Image,
   Flex,
+  Tabs,
+  TabList,
+  TabPanels,
+  TabIndicator,
+  Tab,
+  TabPanel,
+  Card,
+  VStack,
+  Avatar,
 } from "@chakra-ui/react";
 import Footer from "../components/Footer";
 import Header from "../components/Header";
@@ -100,6 +109,82 @@ const ProductDetails = () => {
             </Box>
           </Flex>
         </Container>
+      )}
+
+      {product && (
+        <Card maxW={"container.lg"} mx={"auto"}>
+          {" "}
+          <Tabs colorScheme='green' variant={"enclosed-colored"}>
+            <TabList justifyContent={"space-around"} fontWeight={"semibold"}>
+              <Tab>Product Details</Tab>
+
+              <Tab>Product Reviews</Tab>
+              <Tab>Seller Information</Tab>
+            </TabList>
+            <TabIndicator
+              mt='-1.5px'
+              height='3px'
+              bg='red.500'
+              borderRadius='1px'
+            />
+            <TabPanels>
+              <TabPanel>
+                <Text>{product.description}</Text>
+              </TabPanel>
+              <TabPanel>
+                <Text align={"center"}>No Ratings Yet!</Text>
+              </TabPanel>
+              <TabPanel>
+                <HStack justifyContent={"space-between"}>
+                  <Box width={"50%"}>
+                    <VStack>
+                      <HStack>
+                        <Avatar
+                          size={"lg"}
+                          objectFit={"fill"}
+                          src={product.shop.shop_avatar.url}
+                        />
+                        <Box>
+                          <Text color={"blue.600"} fontSize={"medium"}>
+                            {product.shop.name}
+                          </Text>
+                          <Text>({product.shop.ratings}) Ratings</Text>
+                        </Box>
+                      </HStack>
+                      <Text>
+                        Lorem ipsum dolor sit, amet consectetur adipisicing
+                        elit. A, quidem exercitationem natus est tempore
+                        praesentium placeat pariatur recusandae eum repellat
+                        ratione neque ipsa, repellendus illo velit omnis, quo
+                        doloribus? Ullam!
+                      </Text>
+                    </VStack>
+                  </Box>
+                  <VStack>
+                    <span>
+                      Joined On:
+                      <span className=' font-bold ml-3'>29 July, 2022</span>
+                    </span>
+                    <span>
+                      Last Updated:
+                      <span className=' font-bold ml-3'>29 July, 2022</span>
+                    </span>
+                    <span>
+                      Total products:
+                      <span className=' font-bold ml-3'>1100</span>
+                    </span>
+                    <Button
+                      bg={"black"}
+                      color={"white"}
+                      colorScheme={"blackAlpha"}>
+                      Visit Shop
+                    </Button>
+                  </VStack>
+                </HStack>
+              </TabPanel>
+            </TabPanels>
+          </Tabs>
+        </Card>
       )}
 
       <Footer />
