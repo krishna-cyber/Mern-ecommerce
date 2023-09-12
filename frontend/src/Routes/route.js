@@ -9,7 +9,8 @@ import EventSection from "../components/EventSection";
 import CompaniesProduct from "../components/CompaniesProduct";
 import Footer from "../components/Footer";
 import FAQ from "../components/FAQ";
-
+import SimilarProduct from "../components/SimilarProduct";
+import ProfileComponent from "../components/ProfileComponent.jsx";
 export {
   Header,
   Hero,
@@ -18,6 +19,8 @@ export {
   FeatureProduct,
   EventSection,
   CompaniesProduct,
+  SimilarProduct,
+  ProfileComponent,
   Footer,
   FAQ,
 };

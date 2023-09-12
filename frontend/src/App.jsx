@@ -11,6 +11,7 @@ import {
   Faq,
   Products,
   Events,
+  Profile,
 } from "./utils/routes";
 import { useSelector, useDispatch } from "react-redux";
 import {
@@ -55,6 +56,7 @@ const App = () => {
           path='/activate/:activation_token'
           element={<ActivationPage />}
         />
+        <Route path='/profile' element={<Profile />} />
       </Routes>
     </div>
   );

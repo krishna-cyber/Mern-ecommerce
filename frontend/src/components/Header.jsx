@@ -427,9 +427,11 @@ const Header = () => {
                       />
                     </MenuButton>
                     <MenuList>
-                      <MenuItem icon={<AiOutlineUser />} color={"black"}>
-                        Profile
-                      </MenuItem>
+                      <Link to='/profile'>
+                        <MenuItem icon={<AiOutlineUser />} color={"black"}>
+                          Profile
+                        </MenuItem>
+                      </Link>
                       <MenuItem icon={<RxDashboard />} color={"black"}>
                         Dashboard
                       </MenuItem>

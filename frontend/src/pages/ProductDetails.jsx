@@ -19,8 +19,7 @@ import {
   VStack,
   Avatar,
 } from "@chakra-ui/react";
-import Footer from "../components/Footer";
-import Header from "../components/Header";
+import { Header, Footer } from "../Routes/route";
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { productData } from "../static/data";
@@ -186,7 +185,7 @@ const ProductDetails = () => {
           </Tabs>
         </Card>
       )}
-
+      <SimilarProduct />
       <Footer />
     </>
   );

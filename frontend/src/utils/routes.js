@@ -8,5 +8,16 @@ import ActivationPage from "../pages/ActivationPage";
 import Faq from "../pages/Faq";
 import Products from "../pages/Products";
 import Events from "../pages/Events";
+import Profile from "../pages/Profile";
 
-export { Login, Register, Home, Forgot, ActivationPage, Faq, Products, Events };
+export {
+  Login,
+  Register,
+  Home,
+  Forgot,
+  ActivationPage,
+  Faq,
+  Products,
+  Events,
+  Profile,
+};
